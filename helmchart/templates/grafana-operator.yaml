@@ -23,5 +23,5 @@ spec:
     chart: grafana-operator
     repoURL: oci://ghcr.io/grafana/helm-charts/grafana-operator
     targetRevision: v5.19.4
-    helm:
-      #valuesObject:
+    #helm:
+    #  valuesObject:
