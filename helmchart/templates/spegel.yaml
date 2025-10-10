@@ -1,4 +1,4 @@
-apiVersion: argoproj.io/v1alpha1
+{{- if .Values.spegel.enabled }}apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: spegel
