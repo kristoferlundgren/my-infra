@@ -1,0 +1,49 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kyverno
+  namespace: infra
+  annotations:
+    argocd.argoproj.io/compare-options: ServerSideDiff=true,IncludeMutationWebhook=true
+spec:
+  project: infra
+  destination:
+    namespace: kyverno
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+  source:
+    chart: kyverno
+    repoURL: https://kyverno.github.io/kyverno/
+    # https://artifacthub.io/packages/helm/kyverno/kyverno
+    targetRevision: 3.5.1
+    helm:
+      valuesObject:
+        crds:
+          install: true
+        grafana:
+          enabled: true
+          grafanaDashboard:
+            create: true
+        admissionController:
+          crdWatcher: true
+          replicas: 3 # High Availability
+        backgroundController:
+          replicas: 2 # High Availability
+        cleanupController:
+          replicas: 2 # High Availability
+        reportsController:
+          replicas: 2 # High Availability
+
+# DENY all traffic from other namespaces (a.k.a LIMIT access to the current namespace)
+# https://github.com/ahmetb/kubernetes-network-policy-recipes/blob/master/04-deny-traffic-from-other-namespaces.md
+
+# Using Calico, you can apply one GlobalNetworkPolicy to deny Ingress that is valid for all existing and future Namespaces:
+# https://stackoverflow.com/a/70776869/14219198
