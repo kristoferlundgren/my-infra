@@ -1,10 +1,11 @@
-#!/bin/sh -x
+#!/bin/bash -ex
 
 # Deploy Helm chart:
 helm upgrade \
   --install my-infra helmchart/ \
   --take-ownership \
-  --values <(devbox secrets list --format dotenv --show)
+  --values helmchart/values.yaml \
+  --values <(devbox secrets list --format dotenv --show | sed 's|=|: |')
 
 # List installed Helm charts:
 helm list -A --all
