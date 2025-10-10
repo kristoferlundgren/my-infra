@@ -1,0 +1,48 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kyverno-policies
+  namespace: infra
+  annotations:
+    argocd.argoproj.io/compare-options: ServerSideDiff=true,IncludeMutationWebhook=true
+spec:
+  project: infra
+  destination:
+    namespace: kyverno
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
+      - Force=true
+      - Replace=true
+      - ServerSideApply=true
+  source:
+    chart: kyverno-policies
+    repoURL: https://kyverno.github.io/kyverno/
+    # https://artifacthub.io/packages/helm/kyverno-policies-oci/kyverno-policies
+    # https://kyverno.io/docs/installation/methods/#install-pod-security-policies-via-helm
+    # https://kyverno.io/policies/pod-security/
+    # https://kubernetes.io/docs/concepts/security/pod-security-standards/
+    targetRevision: 3.5.1
+    helm:
+      releaseName: kyverno-policies # Override ArgoCD application name
+      valuesObject:
+        podSecurityStandard: restricted
+        validationFailureAction: Audit # TODO: Change to Enforce
+        validationFailureActionOverrides:
+          all:
+            - action: audit
+              namespaces:
+                - kube-system
+        validationFailureActionByPolicy: # (`Audit`, `Enforce`)
+            disallow-capabilities-strict: Audit
+            disallow-privilege-escalation: Audit
+            require-run-as-nonroot: Audit
+            restrict-seccomp-strict: Audit
+            disallow-host-process: Enforce
+            disallow-privileged-containers: Enforce

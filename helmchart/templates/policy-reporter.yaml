@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: policy-reporter
+  namespace: infra
+  annotations:
+    argocd.argoproj.io/compare-options: ServerSideDiff=true,IncludeMutationWebhook=true
+spec:
+  project: infra
+  destination:
+    namespace: policy-reporter
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+  source:
+    chart: policy-reporter
+    repoURL: https://kyverno.github.io/policy-reporter
+    # https://artifacthub.io/packages/helm/policy-reporter/policy-reporter
+    targetRevision: 3.5.0
+    helm:
+      valuesObject:
+        ui:
+          enabled: true
+        plugin:
+          kyverno:
+            enabled: true
+            networkPolicy:
+              enabled: true
+        monitoring:
+          grafana:
+            grafanaDashboard:
+              enabled: true # Requires Grafana Operator
