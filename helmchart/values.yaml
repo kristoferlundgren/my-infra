@@ -1,0 +1,6 @@
+name: my-infra
+repoURL: https://github.com/kristoferlundgren/my-infra.git
+targetRevision: HEAD
+path: helmchart
+username: token
+password: pass
