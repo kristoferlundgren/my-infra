@@ -1,3 +1,4 @@
+# Default values:
 name: my-infra
 repoURL: https://github.com/kristoferlundgren/my-infra.git
 targetRevision: HEAD
