@@ -1,4 +1,5 @@
-{{- if .Values.spegel.enabled }}apiVersion: argoproj.io/v1alpha1
+{{ if .Values.spegel.enabled }}
+apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: spegel
@@ -20,6 +21,7 @@ spec:
       - CreateNamespace=true
       - ServerSideApply=true
   source:
-    path: .
-    repoURL: oci://ghcr.io/spegel-org/helm-charts/spegel
+    chart: spegel
+    repoURL: oci://ghcr.io/spegel-org/helm-charts
     targetRevision: 0.3.0
+{{ end }}
