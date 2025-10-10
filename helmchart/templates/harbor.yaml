@@ -31,7 +31,7 @@ spec:
           tls:
             enabled: false
         core:
-          replicas: 1 # HA>=2
+          replicas: 2 # HA>=2
         portal:
           replicas: 1
         jobservice:
