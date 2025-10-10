@@ -41,9 +41,3 @@ spec:
           replicas: 2 # High Availability
         reportsController:
           replicas: 2 # High Availability
-
-# DENY all traffic from other namespaces (a.k.a LIMIT access to the current namespace)
-# https://github.com/ahmetb/kubernetes-network-policy-recipes/blob/master/04-deny-traffic-from-other-namespaces.md
-
-# Using Calico, you can apply one GlobalNetworkPolicy to deny Ingress that is valid for all existing and future Namespaces:
-# https://stackoverflow.com/a/70776869/14219198

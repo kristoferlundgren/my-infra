@@ -24,7 +24,7 @@ spec:
     repoURL: https://open-telemetry.github.io/opentelemetry-helm-charts
     targetRevision: 0.95.0
     helm:
-      valuesObject:
+#      valuesObject:
 #        manager:
 #          collectorImage:
 #            repository: "otel/opentelemetry-collector-k8s"
