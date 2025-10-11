@@ -10,6 +10,8 @@ metadata:
   namespace: grafana
   labels:
     dashboards: "grafana"
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   config:
     security:
