@@ -1,3 +1,5 @@
+# Spegel requires containerd
+# - https://spegel.dev/docs/getting-started/#compatibility
 {{ if .Values.app_spegel }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
