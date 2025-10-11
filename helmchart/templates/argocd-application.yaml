@@ -29,6 +29,7 @@ spec:
     helm:
       releaseName: {{ .Values.name }}
       valuesObject:
+        app_spegel: {{ .Values.app_spegel }}
         repoURL: {{ .Values.repoURL }}
         targetRevision: {{ .Values.targetRevision }}
         path: {{ .Values.path }}

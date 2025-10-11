@@ -1,4 +1,9 @@
-# Default values:
+# Default values
+
+# All variables must also be added to this file:
+# ./helmchart/templates/argocd-application.yaml
+# (Helm chart is redeployed by ArgoCD)
+
 app_spegel: true
 
 name: my-infra
