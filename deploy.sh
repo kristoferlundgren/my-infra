@@ -1,5 +1,8 @@
 #!/bin/bash -ex
 
+# Show variables:
+devbox secrets list --format dotenv | sed 's|=|: |'
+
 # Deploy Helm chart:
 helm upgrade \
   --install my-infra helmchart/ \
