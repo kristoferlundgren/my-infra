@@ -11,7 +11,9 @@ metadata:
   labels:
     dashboards: "grafana"
   annotations:
+    argocd.argoproj.io/compare-options: ServerSideDiff=true,IncludeMutationWebhook=true
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: "50"
 spec:
   config:
     security:
