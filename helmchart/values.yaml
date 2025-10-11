@@ -1,4 +1,6 @@
 # Default values:
+app_spegel: true
+
 name: my-infra
 repoURL: https://github.com/kristoferlundgren/my-infra.git
 targetRevision: HEAD
