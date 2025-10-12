@@ -1,0 +1,4 @@
+# Ignore contained Helm chart files
+# (Otherwise, Helm tries to interpret files as Kubernetes manifests)
+Chart.yaml
+values.yaml
