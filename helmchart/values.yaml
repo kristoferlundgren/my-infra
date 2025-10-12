@@ -1,7 +1,7 @@
 # Default values
 
 # All variables must also be added to this file:
-# ./helmchart/templates/argocd-application.yaml
+# ./helmchart/templates/application.yaml
 # (Helm chart is redeployed by ArgoCD)
 
 app_spegel: true
