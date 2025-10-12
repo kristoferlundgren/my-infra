@@ -8,7 +8,8 @@ helm template \
   my-infra helmchart/templates/bootstrap/ \
   --take-ownership \
   --values helmchart/values.yaml \
-  --values <(devbox secrets list --format dotenv --show | sed 's|=|: |')
+  --values <(devbox secrets list --format dotenv --show | sed 's|=|: |') \
+  | kubectl apply --filename -
 
 # List installed Helm charts:
 helm list -A --all
