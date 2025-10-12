@@ -30,8 +30,10 @@ spec:
       releaseName: {{ .Values.name }}
       valuesObject:
         app_spegel: {{ .Values.app_spegel }}
+        name: {{ .Values.name }}
+        password: {{ .Values.password }}
+        path: {{ .Values.path }}
+        project: {{ .Values.project }}
         repoURL: {{ .Values.repoURL }}
         targetRevision: {{ .Values.targetRevision }}
-        path: {{ .Values.path }}
         username: {{ .Values.username }}
-        password: {{ .Values.password }}
