@@ -4,8 +4,8 @@
 devbox secrets list --format dotenv | sed 's|=|: |'
 
 # Deploy Helm chart:
-helm upgrade \
-  --install my-infra helmchart/ \
+helm template \
+  my-infra helmchart/bootstrap/ \
   --take-ownership \
   --values helmchart/values.yaml \
   --values <(devbox secrets list --format dotenv --show | sed 's|=|: |')
