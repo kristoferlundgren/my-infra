@@ -5,7 +5,6 @@ metadata:
   namespace: infra
   annotations:
     argocd.argoproj.io/compare-options: ServerSideDiff=true,IncludeMutationWebhook=true
-    argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/sync-wave: "-10"
   finalizers:
     # https://argo-cd.readthedocs.io/en/latest/user-guide/app_deletion/#about-the-deletion-finalizer
