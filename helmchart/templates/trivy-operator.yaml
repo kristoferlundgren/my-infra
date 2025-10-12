@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: trivy
+  name: trivy-operator
   namespace: infra
   annotations:
     argocd.argoproj.io/compare-options: ServerSideDiff=true,IncludeMutationWebhook=true
@@ -12,7 +12,7 @@ metadata:
 spec:
   project: infra
   destination:
-    namespace: trivy
+    namespace: trivy-operator
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:
@@ -24,10 +24,11 @@ spec:
       - CreateNamespace=true
       - ServerSideApply=true
   source:
-    chart: trivy
+    chart: trivy-operator
     repoURL: https://aquasecurity.github.io/helm-charts/
-    # https://artifacthub.io/packages/helm/trivy-operator/trivy
-    targetRevision: 0.19.0
+    # https://artifacthub.io/packages/helm/trivy-operator/trivy-operator
+    # https://aquasecurity.github.io/trivy-operator/latest/getting-started/installation/helm/
+    targetRevision: 0.31.0
     helm:
-      releaseName: trivy
+      releaseName: trivy-operator
       #valuesObject:
