@@ -27,3 +27,12 @@ spec:
     repoURL: https://kubernetes.github.io/ingress-nginx
     # https://artifacthub.io/packages/helm/stakater/ingress-nginx
     targetRevision: 4.13.3
+    helm:
+      releaseName: kyverno-policies # Override ArgoCD application name
+      valuesObject:
+        controller:
+          networkPolicy:
+            enabled: true
+        defaultBackend:
+          networkPolicy:
+            enabled: true
