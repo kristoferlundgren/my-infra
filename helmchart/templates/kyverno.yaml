@@ -8,7 +8,9 @@ metadata:
     argocd.argoproj.io/sync-wave: "-100"
   finalizers:
     # https://argo-cd.readthedocs.io/en/latest/user-guide/app_deletion/#about-the-deletion-finalizer
-    - resources-finalizer.argocd.argoproj.io
+    # Finalizer intentionally disabled. Deleting Kyverno can lead to cluster errors.
+    # (ArgoCD Application will disappear, but Kyverno remains)
+    # - resources-finalizer.argocd.argoproj.io
 spec:
   project: {{ .Values.project }}
   destination:
