@@ -1,7 +1,5 @@
 # Helm chart default values.
 
-app_spegel: true
-
 name: my-infra
 project: infra
 namespace: infra
@@ -11,3 +9,5 @@ path: helmchart
 username: token
 password: pass
 server: https://kubernetes.default.svc
+
+app_spegel: true
