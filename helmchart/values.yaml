@@ -4,6 +4,7 @@ app_spegel: true
 
 name: my-infra
 project: infra
+namespace: infra
 repoURL: https://github.com/kristoferlundgren/my-infra.git
 targetRevision: HEAD
 path: helmchart
