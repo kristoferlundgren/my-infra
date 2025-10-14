@@ -28,7 +28,7 @@ spec:
     # https://artifacthub.io/packages/helm/stakater/ingress-nginx
     targetRevision: 4.13.3
     helm:
-      releaseName: kyverno-policies # Override ArgoCD application name
+      releaseName: ingress-nginx # Override ArgoCD application name
       valuesObject:
         controller:
           networkPolicy:
