@@ -33,6 +33,11 @@ spec:
         controller:
           networkPolicy:
             enabled: true
+        controller:
+          admissionWebhooks:
+            patch:
+              networkPolicy:
+                enabled: true
         defaultBackend:
           networkPolicy:
             enabled: true
