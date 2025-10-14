@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: trivy-operator
-  namespace: infra
+  namespace: {{ .Values.namespace }}
   annotations:
     argocd.argoproj.io/compare-options: ServerSideDiff=true,IncludeMutationWebhook=true
     argocd.argoproj.io/sync-wave: "50"
