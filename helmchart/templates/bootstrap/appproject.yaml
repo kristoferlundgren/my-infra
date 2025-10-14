@@ -1,16 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: infra
+  name: {{ .Values.project }}
   namespace: argocd
 spec:
   sourceRepos:
-    - '*'
+    - '{{ .Values.repoURL }}'
   sourceNamespaces:
-    - infra
+    - {{ .Values.namespace }}
   destinations:
     - namespace: '*'
-      server: '*'
+      server: '{{ .Values.server }}'
   clusterResourceWhitelist:
     - group: '*'
       kind: '*'
