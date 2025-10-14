@@ -15,7 +15,7 @@ spec:
   project: {{ .Values.project }}
   destination:
     namespace: spegel
-    server: https://kubernetes.default.svc
+    server: {{ .Values.server }}
   syncPolicy:
     automated:
       enabled: true

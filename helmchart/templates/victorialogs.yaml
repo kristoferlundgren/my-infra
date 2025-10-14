@@ -12,7 +12,7 @@ spec:
   project: {{ .Values.project }}
   destination:
     namespace: victoria-logs
-    server: https://kubernetes.default.svc
+    server: {{ .Values.server }}
   syncPolicy:
     automated:
       enabled: true
