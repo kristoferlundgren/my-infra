@@ -9,7 +9,7 @@ metadata:
     # https://argo-cd.readthedocs.io/en/latest/user-guide/app_deletion/#about-the-deletion-finalizer
     - resources-finalizer.argocd.argoproj.io/background
 spec:
-  project: infra
+  project: {{ .Values.project }}
   destination:
     namespace: reloader
     server: https://kubernetes.default.svc
