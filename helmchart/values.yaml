@@ -10,3 +10,4 @@ targetRevision: HEAD
 path: helmchart
 username: token
 password: pass
+server: https://kubernetes.default.svc

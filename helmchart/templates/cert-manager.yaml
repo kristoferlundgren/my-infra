@@ -13,7 +13,7 @@ spec:
   project: {{ .Values.project }}
   destination:
     namespace: cert-manager
-    server: https://kubernetes.default.svc
+    server: {{ .Values.server }}
   syncPolicy:
     automated:
       enabled: true
