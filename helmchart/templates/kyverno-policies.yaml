@@ -7,7 +7,7 @@ metadata:
     argocd.argoproj.io/compare-options: ServerSideDiff=true,IncludeMutationWebhook=true
   finalizers:
     # https://argo-cd.readthedocs.io/en/latest/user-guide/app_deletion/#about-the-deletion-finalizer
-    - resources-finalizer.argocd.argoproj.io/background
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: {{ .Values.project }}
   destination:
