@@ -1,0 +1,34 @@
+# Note: This chart was formerly named prometheus-operator chart, now renamed to
+# more clearly reflect that it installs the kube-prometheus project stack, within
+# which Prometheus Operator is only one component. This chart does not install
+# all components of kube-prometheus, notably excluding the Prometheus Adapter
+# and Prometheus black-box exporter.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-prometheus-stack
+  namespace: {{ .Values.namespace }}
+  annotations:
+    argocd.argoproj.io/compare-options: ServerSideDiff=true,IncludeMutationWebhook=true
+  finalizers:
+    # https://argo-cd.readthedocs.io/en/latest/user-guide/app_deletion/#about-the-deletion-finalizer
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: {{ .Values.project }}
+  destination:
+    namespace: kube-prometheus-stack
+    server: {{ .Values.server }}
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+  source:
+    chart: kube-prometheus-stack
+    repoURL: https://prometheus-community.github.io/helm-charts
+    # https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
+    targetRevision: 78.2.1
