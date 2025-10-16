@@ -32,3 +32,15 @@ spec:
     repoURL: https://prometheus-community.github.io/helm-charts
     # https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
     targetRevision: 78.2.1
+    helm:
+      releaseName: kube-prometheus-stack
+      valuesObject:
+        alertmanager:
+          ingress:
+            enabled: true
+        grafana:
+          ingress:
+            enabled: true
+        prometheus:
+          ingress:
+            enabled: true
