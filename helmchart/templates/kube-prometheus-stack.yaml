@@ -37,10 +37,10 @@ spec:
       valuesObject:
         alertmanager:
           ingress:
-            enabled: true
+            enabled: false
         grafana:
           ingress:
-            enabled: true
+            enabled: false
         prometheus:
           ingress:
-            enabled: true
+            enabled: false
