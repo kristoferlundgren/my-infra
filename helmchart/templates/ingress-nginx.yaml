@@ -25,7 +25,7 @@ spec:
   source:
     chart: ingress-nginx
     repoURL: https://kubernetes.github.io/ingress-nginx
-    # https://artifacthub.io/packages/helm/stakater/ingress-nginx
+    # https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx
     targetRevision: 4.13.3
     helm:
       releaseName: ingress-nginx # Override ArgoCD application name
@@ -38,6 +38,14 @@ spec:
             patch:
               networkPolicy:
                 enabled: true
+          service:
+            annotations:
+              external-dns.alpha.kubernetes.io/hostname: k8s.orb.local.
+          metrics:
+            enabled: true
+            prometheusRule:
+              enabled: true
         defaultBackend:
+          enabled: true
           networkPolicy:
             enabled: true
