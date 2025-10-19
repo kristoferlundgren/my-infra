@@ -57,4 +57,3 @@ spec:
           enabled: true
           networkPolicy:
             enabled: true
-controller.service.
