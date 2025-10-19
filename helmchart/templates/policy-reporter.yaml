@@ -40,9 +40,11 @@ spec:
             - host: policy-reporter.k8s.orb.local
               paths:
                 - path: "/(.*)"
+                  pathType: ImplementationSpecific
             - host: policy-reporter.localhost
               paths:
                 - path: "/(.*)"
+                  pathType: ImplementationSpecific
         ui:
           enabled: true
         plugin:
