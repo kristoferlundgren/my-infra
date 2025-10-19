@@ -29,10 +29,11 @@ spec:
     # https://artifacthub.io/packages/helm/metallb/metallb
     targetRevision: 0.15.2
     helm:
-      prometheus:
-        podMonitor:
-          enabled: true
-        serviceMonitor:
-          enabled: true
-        prometheusRule:
-          enabled: true
+      valuesObject:
+        prometheus:
+          podMonitor:
+            enabled: true
+          serviceMonitor:
+            enabled: true
+          prometheusRule:
+            enabled: true
