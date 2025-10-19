@@ -33,6 +33,12 @@ spec:
     targetRevision: 3.5.0
     helm:
       valuesObject:
+        ingress:
+          enabled: true
+          className: nginx
+          hosts:
+            - policy-reporter.k8s.orb.local
+            - policy-reporter.localhost
         ui:
           enabled: true
         plugin:
