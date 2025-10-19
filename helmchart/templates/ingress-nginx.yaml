@@ -31,23 +31,22 @@ spec:
       releaseName: ingress-nginx # Override ArgoCD application name
       valuesObject:
         controller:
-          networkPolicy:
-            enabled: true
-        controller:
           admissionWebhooks:
             patch:
               networkPolicy:
                 enabled: true
           ingressClassResource:
             default: true
-          service:
-            annotations:
-              external-dns.alpha.kubernetes.io/hostname: k8s.orb.local.
-            type: NodePort
           metrics:
             enabled: true
             #prometheusRule:
             #  enabled: true
+          networkPolicy:
+            enabled: true
+          service:
+            annotations:
+              external-dns.alpha.kubernetes.io/hostname: k8s.orb.local.
+            type: NodePort
         defaultBackend:
           enabled: true
           networkPolicy:
