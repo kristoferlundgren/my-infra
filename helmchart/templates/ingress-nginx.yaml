@@ -46,9 +46,9 @@ spec:
           service:
             #annotations:
             #  external-dns.alpha.kubernetes.io/hostname: k8s.orb.local.
-            externalIPs:
-              - 192.168.138.3
-            loadBalancerIP: 192.168.138.3
+            #externalIPs:
+            #  - 192.168.138.3
+            #loadBalancerIP: 192.168.138.3
             type: LoadBalancer
         defaultBackend:
           enabled: true
