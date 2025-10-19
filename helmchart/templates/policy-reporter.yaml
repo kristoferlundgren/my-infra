@@ -39,11 +39,11 @@ spec:
           hosts:
             - host: policy-reporter.k8s.orb.local
               paths:
-                - path: "/(.*)"
+                - path: "/"
                   pathType: ImplementationSpecific
             - host: policy-reporter.localhost
               paths:
-                - path: "/(.*)"
+                - path: "/"
                   pathType: ImplementationSpecific
         ui:
           enabled: true
