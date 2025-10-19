@@ -31,8 +31,6 @@ spec:
     helm:
       valuesObject:
         prometheus:
-          podMonitor:
-            enabled: true
           serviceMonitor:
             enabled: true
           prometheusRule:
