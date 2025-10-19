@@ -25,7 +25,7 @@ spec:
       - ServerSideApply=true
   source:
     chart: metallb
-    repoURL: https://charts.jetstack.io
+    repoURL: https://metallb.github.io/metallb
     # https://artifacthub.io/packages/helm/metallb/metallb
     targetRevision: 0.15.2
     helm:
