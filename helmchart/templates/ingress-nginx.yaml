@@ -46,11 +46,15 @@ spec:
           networkPolicy:
             enabled: true
           service:
+            # https://github.com/orbstack/orbstack/issues/1237#issuecomment-2376954142
+            externalTrafficPolicy: Cluster
             # https://kubernetes-sigs.github.io/external-dns/latest/docs/annotations/annotations/
             # annotations:
             #   external-dns.alpha.kubernetes.io/hostname: k8s.orb.local
-            type: ClusterIP
+            # https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
+            type: LoadBalancer
         defaultBackend:
           enabled: true
           networkPolicy:
             enabled: true
+controller.service.
