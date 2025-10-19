@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: metallb
+  namespace: {{ .Values.namespace }}
+  annotations:
+    argocd.argoproj.io/compare-options: ServerSideDiff=true,IncludeMutationWebhook=true
+    argocd.argoproj.io/sync-wave: "-10"
+  finalizers:
+    # https://argo-cd.readthedocs.io/en/latest/user-guide/app_deletion/#about-the-deletion-finalizer
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: {{ .Values.project }}
+  destination:
+    namespace: metallb
+    server: {{ .Values.server }}
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+  source:
+    chart: metallb
+    repoURL: https://charts.jetstack.io
+    # https://artifacthub.io/packages/helm/metallb/metallb
+    targetRevision: 0.15.2
+    helm:
+      prometheus:
+        podMonitor:
+          enabled: true
+        serviceMonitor:
+          enabled: true
+        prometheusRule:
+          enabled: true
