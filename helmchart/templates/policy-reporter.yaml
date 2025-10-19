@@ -38,9 +38,11 @@ spec:
           className: nginx
           hosts:
             - host: policy-reporter.k8s.orb.local
-              paths: []
+              paths:
+                - /
             - host: policy-reporter.localhost
-              paths: []
+              paths:
+                - /
         ui:
           enabled: true
         plugin:
