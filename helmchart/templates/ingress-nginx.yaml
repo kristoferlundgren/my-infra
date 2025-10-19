@@ -34,10 +34,10 @@ spec:
           networkPolicy:
             enabled: true
         controller:
-          #admissionWebhooks:
-          #  patch:
-          #    networkPolicy:
-          #      enabled: true
+          admissionWebhooks:
+            patch:
+              networkPolicy:
+                enabled: true
           ingressClassResource:
             default: true
           service:
@@ -45,8 +45,8 @@ spec:
               external-dns.alpha.kubernetes.io/hostname: k8s.orb.local.
           metrics:
             enabled: true
-            prometheusRule:
-              enabled: true
+            #prometheusRule:
+            #  enabled: true
         defaultBackend:
           enabled: true
           networkPolicy:
