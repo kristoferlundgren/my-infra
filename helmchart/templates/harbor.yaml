@@ -35,6 +35,8 @@ spec:
           type: clusterIP
           tls:
             enabled: false
+          ingress:
+            className: nginx
         # https://goharbor.io/docs/1.10/install-config/harbor-ha-helm/
         core:
           replicas: 1 # HA>=2
