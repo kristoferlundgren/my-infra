@@ -34,10 +34,10 @@ spec:
           networkPolicy:
             enabled: true
         controller:
-          admissionWebhooks:
-            patch:
-              networkPolicy:
-                enabled: true
+          #admissionWebhooks:
+          #  patch:
+          #    networkPolicy:
+          #      enabled: true
           ingressClassResource:
             default: true
           service:
