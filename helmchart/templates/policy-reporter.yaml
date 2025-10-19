@@ -39,10 +39,10 @@ spec:
           hosts:
             - host: policy-reporter.k8s.orb.local
               paths:
-                - /
+                - path: "/(.*)"
             - host: policy-reporter.localhost
               paths:
-                - /
+                - path: "/(.*)"
         ui:
           enabled: true
         plugin:
