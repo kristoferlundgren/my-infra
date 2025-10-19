@@ -44,8 +44,8 @@ spec:
           networkPolicy:
             enabled: true
           service:
-            annotations:
-              external-dns.alpha.kubernetes.io/hostname: k8s.orb.local.
+            #annotations:
+            #  external-dns.alpha.kubernetes.io/hostname: k8s.orb.local.
             externalIPs:
               - 192.168.138.3
             loadBalancerIP: 192.168.138.3
