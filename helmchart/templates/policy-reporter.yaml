@@ -39,11 +39,11 @@ spec:
             enabled: true
             className: nginx
             hosts:
-              - host: policy-reporter.k8s.orb.local
+              - host: policy-reporter-ui.k8s.orb.local
                 paths:
                   - path: "/"
                     pathType: ImplementationSpecific
-              - host: policy-reporter.localhost
+              - host: policy-reporter-ui.localhost
                 paths:
                   - path: "/"
                     pathType: ImplementationSpecific
