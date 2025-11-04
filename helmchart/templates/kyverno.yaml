@@ -33,6 +33,9 @@ spec:
     targetRevision: 3.5.1
     helm:
       valuesObject:
+        config:
+          # https://main.kyverno.io/docs/installation/platform-notes/#configuration-best-practices
+          preserve: false
         crds:
           install: true
         grafana:
