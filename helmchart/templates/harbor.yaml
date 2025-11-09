@@ -39,8 +39,8 @@ spec:
             enabled: false
           ingress:
             className: nginx
-            # hosts:
-            #   core: harbor-core.harbor.svc.cluster.local
+            hosts:
+              core: harbor-core.k8s.orb.local
         # https://goharbor.io/docs/1.10/install-config/harbor-ha-helm/
         core:
           replicas: 1 # HA>=2
