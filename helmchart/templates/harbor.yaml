@@ -31,6 +31,11 @@ spec:
     targetRevision: 1.18.0
     helm:
       valuesObject:
+        internalTLS:
+          enabled: false
+        expose:
+          tls:
+            enabled: true
         # expose:
         #   type: ingress
         #   tls:
