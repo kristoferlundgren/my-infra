@@ -34,16 +34,13 @@ spec:
         internalTLS:
           enabled: true
         expose:
+          type: ingress
           tls:
             enabled: false
-        # expose:
-        #   type: ingress
-        #   tls:
-        #     enabled: false
-        #   ingress:
-        #     className: nginx
-        #     hosts:
-        #       core: harbor.k8s.orb.local
+          ingress:
+            className: nginx
+            hosts:
+              core: harbor-core.harbor.svc.cluster.local
         # https://goharbor.io/docs/1.10/install-config/harbor-ha-helm/
         core:
           replicas: 1 # HA>=2
