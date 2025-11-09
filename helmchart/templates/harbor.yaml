@@ -31,12 +31,12 @@ spec:
     targetRevision: 1.18.0
     helm:
       valuesObject:
-        internalTLS:
-          enabled: false
+        #internalTLS:
+        #  enabled: false
         expose:
-          type: ingress
-          tls:
-            enabled: false
+        #  type: ingress
+        #  tls:
+        #    enabled: false
           ingress:
             className: nginx
             hosts:
