@@ -32,11 +32,13 @@ spec:
     helm:
       valuesObject:
         expose:
-          type: clusterIP
+          type: ingress
           tls:
             enabled: false
           ingress:
             className: nginx
+            hosts:
+              core: harbor.k8s.orb.local
         # https://goharbor.io/docs/1.10/install-config/harbor-ha-helm/
         core:
           replicas: 1 # HA>=2
