@@ -38,6 +38,10 @@ spec:
           preserve: false
         crds:
           install: true
+        features:
+          policyExceptions:
+            enabled: true
+            namespace: kyverno
         grafana:
           enabled: true
           grafanaDashboard:
