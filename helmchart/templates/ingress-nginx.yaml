@@ -64,6 +64,8 @@ kind: PolicyException
 metadata:
   name: ingress-nginx-host-ports-exception
   namespace: kyverno
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   exceptions:
   - policyName: disallow-host-ports
