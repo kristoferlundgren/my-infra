@@ -1,0 +1,52 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik
+  namespace: {{ .Values.namespace }}
+  annotations:
+    argocd.argoproj.io/compare-options: ServerSideDiff=true,IncludeMutationWebhook=true
+  finalizers:
+    # https://argo-cd.readthedocs.io/en/latest/user-guide/app_deletion/#about-the-deletion-finalizer
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: {{ .Values.project }}
+  destination:
+    namespace: traefik
+    server: {{ .Values.server }}
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+  source:
+    chart: traefik
+    repoURL: https://traefik.github.io/charts
+    # https://artifacthub.io/packages/helm/traefik/traefik
+    targetRevision: 37.4.0
+    helm:
+      releaseName: traefik # Override ArgoCD application name
+      valuesObject:
+        deployment:
+          replicas: 2
+        experimental:
+          kubernetesGateway:
+            enabled: true
+        global:
+          checkNewVersion: false
+          sendAnonymousUsage: false
+        ingressClass:
+          isDefaultClass: true
+        ingressRoute:
+          dashboard:
+            enabled: true
+          healthcheck:
+            enabled: true
+        providers:
+          kubernetesGateway:
+            enabled: true
+          kubernetesIngressNginx:
+            enabled: true
