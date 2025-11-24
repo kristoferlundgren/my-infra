@@ -50,3 +50,5 @@ spec:
             enabled: true
           kubernetesIngressNginx:
             enabled: true
+        service:
+          type: NodePort
