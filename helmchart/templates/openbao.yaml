@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .Values.project }}.openbao
+  namespace: {{ .Values.namespace }}
+  annotations:
+    argocd.argoproj.io/compare-options: ServerSideDiff=true,IncludeMutationWebhook=true
+    argocd.argoproj.io/sync-wave: "-10"
+  finalizers:
+    # https://argo-cd.readthedocs.io/en/latest/user-guide/app_deletion/#about-the-deletion-finalizer
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: {{ .Values.project }}
+  destination:
+    namespace: openbao
+    server: {{ .Values.server }}
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+  source:
+    chart: openbao
+    repoURL: https://openbao.github.io/openbao-helm
+    # https://artifacthub.io/packages/helm/openbao/openbao
+    targetRevision: 0.19.3
+    helm:
+      releaseName: openbao # Override ArgoCD application name
+      #valuesObject:
