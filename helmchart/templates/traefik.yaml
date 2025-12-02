@@ -50,5 +50,7 @@ spec:
             enabled: true
           kubernetesIngressNginx:
             enabled: true
+            publishService:
+              enabled: true
         service:
           type: NodePort
