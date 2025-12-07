@@ -1,0 +1,16 @@
+
+# Traefik emulating ingress-nginx
+# "nginx" IngressClass is used to simulate nginx existence and enable the emulation
+# https://doc.traefik.io/traefik/migrate/nginx-to-traefik/#preserve-the-ingressclass
+#
+# Nginx annotation support:
+#   https://doc.traefik.io/traefik/reference/routing-configuration/kubernetes/ingress-nginx/#annotations-support
+# Caveats:
+#   https://doc.traefik.io/traefik/reference/routing-configuration/kubernetes/ingress-nginx/#limitations
+
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  name: nginx
+spec:
+  controller: k8s.io/ingress-nginx
