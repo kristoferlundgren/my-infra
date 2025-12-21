@@ -52,5 +52,7 @@ spec:
             enabled: true
             publishService:
               enabled: true
+          gateway:
+            enabled: false
         service:
           type: NodePort
