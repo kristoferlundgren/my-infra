@@ -59,4 +59,3 @@ spec:
             enabled: false
         service:
           type: NodePort
-providers.kubernetesIngress
