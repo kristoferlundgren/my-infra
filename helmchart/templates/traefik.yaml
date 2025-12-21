@@ -29,12 +29,13 @@ spec:
     targetRevision: 37.4.0
     helm:
       releaseName: traefik # Override ArgoCD application name
+      # https://doc.traefik.io/traefik/setup/kubernetes/
       valuesObject:
         deployment:
           replicas: 2
         experimental:
           kubernetesGateway:
-            enabled: true
+            enabled: false
         global:
           checkNewVersion: false
           sendAnonymousUsage: false
@@ -48,6 +49,8 @@ spec:
         providers:
           kubernetesGateway:
             enabled: true
+          kubernetesIngress:
+            ingressClass: traefik
           kubernetesIngressNginx:
             enabled: true
             publishService:
@@ -56,3 +59,4 @@ spec:
             enabled: false
         service:
           type: NodePort
+providers.kubernetesIngress
