@@ -30,6 +30,32 @@ spec:
     targetRevision: 0.24.0
     helm:
       valuesObject:
+        # https://github.com/dexidp/dex/blob/master/examples/config-dev.yaml
+        config:
+          issuer: http://127.0.0.1:5556/dex
+          storage:
+            type: sqlite3
+            config:
+              file: /var/dex/dex.db
+          web:
+            http: 0.0.0.0:5556
+          staticClients:
+          - id: example-app
+            redirectURIs:
+            - 'http://127.0.0.1:5555/callback'
+            name: 'Example App'
+            secret: ZXhhbXBsZS1hcHAtc2VjcmV0
+          connectors:
+          - type: mockCallback
+            id: mock
+            name: Example
+          enablePasswordDB: true
+          staticPasswords:
+          - email: "admin@example.com"
+            # bcrypt hash of the string "password": $(echo password | htpasswd -BinC 10 admin | cut -d: -f2)
+            hash: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W"
+            username: "admin"
+            userID: "08a8684b-db88-4b73-90a9-3cd1661f5466"
         ingress:
           enabled: true
           hosts:
