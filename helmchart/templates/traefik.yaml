@@ -33,6 +33,8 @@ spec:
       valuesObject:
         deployment:
           replicas: 2
+        gateway:
+          enabled: false
         global:
           checkNewVersion: false
           sendAnonymousUsage: false
@@ -54,7 +56,5 @@ spec:
             enabled: true
             publishService:
               enabled: true
-          gateway:
-            enabled: false
         service:
           type: ClusterIP
