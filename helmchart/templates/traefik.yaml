@@ -57,4 +57,4 @@ spec:
           gateway:
             enabled: false
         service:
-          type: NodePort
+          type: ClusterIP
