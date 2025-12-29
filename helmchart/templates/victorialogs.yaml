@@ -26,8 +26,8 @@ spec:
       pullPolicy: Always
     retentionPeriod: "1y"
     replicaCount: 2
-  imagePullSecrets:
-    - name: my-repo-secret
+  #imagePullSecrets:
+  #  - name: my-repo-secret
   vlinsert:
     replicaCount: 2
   vlselect:
