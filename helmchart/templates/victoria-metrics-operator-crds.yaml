@@ -25,7 +25,7 @@ spec:
     # https://docs.victoriametrics.com/helm/
     chart: victoria-metrics-operator-crds
     repoURL: https://victoriametrics.github.io/helm-charts/
-    # helm show chart --repo https://victoriametrics.github.io/helm-charts/ victoria-metrics-operator-crds | grep "^version"
+    # https://artifacthub.io/packages/helm/victoriametrics/victoria-metrics-operator-crds
     targetRevision: 0.6.1
     #helm:
     #  valuesObject:
