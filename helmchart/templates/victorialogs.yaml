@@ -35,4 +35,4 @@ spec:
   requestsLoadBalancer:
     enabled: true
     spec:
-    replicaCount: 2
+      replicaCount: 2
