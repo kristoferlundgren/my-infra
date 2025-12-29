@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: victoria-metrics-operator-crds
+  namespace: {{ .Values.namespace }}
+  annotations:
+    argocd.argoproj.io/compare-options: ServerSideDiff=true,IncludeMutationWebhook=true
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: {{ .Values.project }}
+  destination:
+    namespace: victoria-metrics-operator-crds
+    server: {{ .Values.server }}
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=false
+      - ServerSideApply=true
+  source:
+    # https://docs.victoriametrics.com/helm/
+    chart: victoria-metrics-operator-crds
+    repoURL: https://victoriametrics.github.io/helm-charts/
+    # helm show chart --repo https://victoriametrics.github.io/helm-charts/ victoria-metrics-operator-crds | grep "^version"
+    targetRevision: 0.6.1
+    #helm:
+    #  valuesObject:
