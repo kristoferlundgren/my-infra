@@ -1,30 +1,38 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
+apiVersion: v1
+kind: Namespace
 metadata:
-  name: victoria-logs
-  namespace: {{ .Values.namespace }}
+  name: victorialogs
+---
+apiVersion: operator.victoriametrics.com/v1
+kind: VLCluster
+metadata:
+  name: my-victorialogs
+  namespace: victorialogs
   annotations:
-    argocd.argoproj.io/compare-options: ServerSideDiff=true,IncludeMutationWebhook=true
-  finalizers:
-    # https://argo-cd.readthedocs.io/en/latest/user-guide/app_deletion/#about-the-deletion-finalizer
-    - resources-finalizer.argocd.argoproj.io
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
-  project: {{ .Values.project }}
-  destination:
-    namespace: victoria-logs
-    server: {{ .Values.server }}
-  syncPolicy:
-    automated:
-      enabled: true
-      prune: true
-      selfHeal: true
-      allowEmpty: true
-    syncOptions:
-      - CreateNamespace=true
-      - ServerSideApply=true
-  source:
-    chart: victoria-logs-cluster
-    repoURL: https://victoriametrics.github.io/helm-charts/
-    targetRevision: 0.0.11
-    #helm:
-    #  valuesObject:
+  vlstorage:
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    image:
+      # https://github.com/VictoriaMetrics/VictoriaLogs/releases
+      repository: victoriametrics/victoria-logs
+      tag: v1.43.1
+      pullPolicy: Always
+    retentionPeriod: "1y"
+    replicaCount: 2
+  imagePullSecrets:
+    - name: my-repo-secret
+  vlinsert:
+    replicaCount: 2
+  vlselect:
+    replicaCount: 2
+  requestsLoadBalancer:
+    enabled: true
+    spec:
+    replicaCount: 2
