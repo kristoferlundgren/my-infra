@@ -36,7 +36,7 @@ spec:
       releaseName: kyverno-policies # Override ArgoCD application name
       valuesObject:
         policyKind: ClusterPolicy
-        policyType: ValidatingPolicy
+        policyType: ClusterPolicy
         podSecurityStandard: restricted
         validationFailureAction: Audit # TODO: Change to Enforce
         validationFailureActionOverrides:
