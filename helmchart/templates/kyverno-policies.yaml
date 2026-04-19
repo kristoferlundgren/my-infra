@@ -36,7 +36,7 @@ spec:
       releaseName: kyverno-policies # Override ArgoCD application name
       valuesObject:
         policyKind: ClusterPolicy
-        policyType: ClusterPolicy
+        policyType: ClusterPolicy # TODO: Change to "ValidatingPolicy" When Kyverno v1.18 is released (https://github.com/kyverno/kyverno/issues/15640)
         podSecurityStandard: restricted
         validationFailureAction: Audit # TODO: Change to Enforce
         validationFailureActionOverrides:
@@ -52,6 +52,7 @@ spec:
             disallow-host-process: Enforce
             disallow-privileged-containers: Enforce
         policyExclude:
+        # Exclude "restricted" policies from selected namespaces to avoid breaking critical workloads.
           {{- range list
             "disallow-capabilities"
             "disallow-capabilities-strict"
@@ -82,5 +83,39 @@ spec:
                     - ReplicaSet
                     - StatefulSet
                   namespaces:
+                    - argocd
+                    - cert-manager
+                    - default
+                    - devpod
+                    - dex
+                    - grafana-operator
+                    - grafana-test
+                    - harbor
+                    - infra
+                    - ingress-nginx
+                    - kong
+                    - kube-node-lease
+                    - kube-prometheus-stack
+                    - kube-public
                     - kube-system
+                    - kyverno
+                    - kyverno-policy-reporter
+                    - litellm
+                    - metallb
+                    - multitool-a
+                    - multitool-b
+                    - my-apps
+                    - open-webui
+                    - openbao
+                    - opentelemetry-collector
+                    - opentelemetry-operator
+                    - plantuml-server
+                    - pomerium
+                    - portkey
+                    - reloader
+                    - sealed-secrets
+                    - traefik
+                    - trivy-operator
+                    - victorialogs
+                    - victoriametrics-operator
           {{- end }}
