@@ -35,6 +35,8 @@ spec:
     helm:
       releaseName: kyverno-policies # Override ArgoCD application name
       valuesObject:
+        policyKind: ClusterPolicy
+        policyType: ValidatingPolicy
         podSecurityStandard: restricted
         validationFailureAction: Audit # TODO: Change to Enforce
         validationFailureActionOverrides:
@@ -49,3 +51,11 @@ spec:
             restrict-seccomp-strict: Audit
             disallow-host-process: Enforce
             disallow-privileged-containers: Enforce
+        policyExclude:
+          disallow-host-path:
+            any:
+            - resources:
+                kinds:
+                - Pod
+                namespaces:
+                - kube-system
