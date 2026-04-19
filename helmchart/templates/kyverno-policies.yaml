@@ -75,7 +75,11 @@ spec:
             any:
               - resources:
                   kinds:
+                    - DaemonSet
+                    - Deployment
                     - Pod
+                    - ReplicaSet
+                    - StatefulSet
                   namespaces:
                     - kube-system
           {{- end }}
