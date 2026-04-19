@@ -14,7 +14,7 @@ metadata:
 spec:
   project: {{ .Values.project }}
   destination:
-    namespace: policy-reporter
+    namespace: kyverno-policy-reporter
     server: {{ .Values.server }}
   syncPolicy:
     automated:
@@ -30,7 +30,7 @@ spec:
     chart: policy-reporter
     repoURL: https://kyverno.github.io/policy-reporter
     # https://artifacthub.io/packages/helm/policy-reporter/policy-reporter
-    targetRevision: 3.5.0
+    targetRevision: 3.7.3
     helm:
       valuesObject:
         ui:
