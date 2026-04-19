@@ -4,7 +4,7 @@ name: my-infra
 project: infra
 namespace: infra
 repoURL: https://github.com/kristoferlundgren/my-infra.git
-targetRevision: HEAD
+targetRevision: feature/laptop
 path: helmchart
 username: token
 password: pass
