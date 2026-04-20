@@ -1,3 +1,40 @@
 # https://coder.com/docs/install/kubernetes
 # https://coder.com/blog/lessons-learned-from-v1-and-oss-to-enterprise-editions
 # https://artifacthub.io/packages/helm/coder-v2/coder
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: coder
+  namespace: {{ .Values.namespace }}
+  annotations:
+    argocd.argoproj.io/compare-options: ServerSideDiff=true,IncludeMutationWebhook=true
+    argocd.argoproj.io/sync-wave: "-10"
+  finalizers:
+    # https://argo-cd.readthedocs.io/en/latest/user-guide/app_deletion/#about-the-deletion-finalizer
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: {{ .Values.project }}
+  destination:
+    namespace: coder
+    server: {{ .Values.server }}
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+  source:
+    chart: coder
+    repoURL: https://helm.coder.com/v2
+    # https://artifacthub.io/packages/helm/coder-v2/coder
+    targetRevision: 2.32.0
+    helm:
+      valuesObject:
+        coder:
+          livenessProbe:
+            enabled: true
+          service:
+            type: ClusterIP

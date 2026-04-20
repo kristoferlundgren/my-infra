@@ -86,6 +86,7 @@ spec:
                   namespaces:
                     - argocd
                     - cert-manager
+                    - coder
                     - default
                     - devpod
                     - dex
