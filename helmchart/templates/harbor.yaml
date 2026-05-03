@@ -37,7 +37,7 @@ spec:
         #   tls:
         #     auto:
         #       commonName: harbor-portal.harbor.svc.cluster.local
-          type: nodePort
+          type: clusterIP
           tls:
             enabled: false
         #   ingress:
