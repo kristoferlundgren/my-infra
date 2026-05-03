@@ -33,13 +33,13 @@ spec:
       valuesObject:
         internalTLS:
           enabled: false
-        # expose:
+        expose:
         #   tls:
         #     auto:
         #       commonName: harbor-portal.harbor.svc.cluster.local
-        #   type: clusterIP
-        #   tls:
-        #     enabled: false
+          type: clusterIP
+          tls:
+            enabled: false
         #   ingress:
         #     className: traefik
         #     hosts:
