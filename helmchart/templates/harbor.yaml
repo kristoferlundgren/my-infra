@@ -34,6 +34,9 @@ spec:
         internalTLS:
           enabled: true
         expose:
+          tls:
+            auto:
+              commonName: harbor-portal.harbor.svc.cluster.local
           type: clusterIP
         #   tls:
         #     enabled: false
