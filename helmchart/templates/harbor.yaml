@@ -43,7 +43,7 @@ spec:
           ingress:
             className: traefik
             hosts:
-              core: harbor-core.harbor.svc.cluster.local
+              core: harbor.k8s.orb.local
         externalURL: harbor.k8s.orb.local
 
         # https://goharbor.io/docs/1.10/install-config/harbor-ha-helm/
