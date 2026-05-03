@@ -1,3 +1,4 @@
+
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 # https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Controlling-Resource-Modification/
@@ -37,9 +38,9 @@ spec:
         # https://argo-cd.readthedocs.io/en/latest/user-guide/app_deletion/#about-the-deletion-finalizer
         - resources-finalizer.argocd.argoproj.io
       name: 'my-infra.{{.path.basenameNormalized}}'
-      namespace: {{ .Values.applicationNamespace }}
+      namespace: '{{.values.applicationNamespace}}'
     spec:
-      project: {{ .Values.applicationProject }}
+      project: '{{.values.applicationProject}}'
       syncPolicy:
         automated:
           enabled: true
@@ -51,11 +52,12 @@ spec:
           - ServerSideApply=true
       destination:
         namespace: '{{.path.basenameNormalized}}'
-        server: {{ .Values.clusterURL }}
+        server: '{{.values.clusterURL}}'
       source:
-        repoURL: {{ .Values.repoURL }}
-        targetRevision: {{ .Values.targetRevision }}
+        repoURL: '{{.values.repoURL}}'
+        targetRevision: '{{.values.targetRevision}}'
         path: '{{.path.path}}'
         helm:
           releaseName: '{{.path.basenameNormalized}}'
-          valueFiles: '{{.path.path}}'/values.yaml
+          valueFiles:
+            - '{{.path.path}}/values.yaml'
