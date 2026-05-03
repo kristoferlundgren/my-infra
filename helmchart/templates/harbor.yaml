@@ -37,16 +37,16 @@ spec:
         #   tls:
         #     auto:
         #       commonName: harbor-portal.harbor.svc.cluster.local
-          type: ingress
+          type: nodePort
           tls:
             enabled: false
-          ingress:
-            className: traefik
-            hosts:
-              core: harbor.k8s.orb.local
-            annotations:
-              traefik.ingress.kubernetes.io/router.tls: "false"
-        externalURL: http://harbor.k8s.orb.local
+        #   ingress:
+        #     className: traefik
+        #     hosts:
+        #       core: harbor.k8s.orb.local
+        #     annotations:
+        #       traefik.ingress.kubernetes.io/router.tls: "false"
+        # externalURL: http://harbor.k8s.orb.local
 
         # https://goharbor.io/docs/1.10/install-config/harbor-ha-helm/
         core:
