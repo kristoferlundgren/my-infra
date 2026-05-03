@@ -26,7 +26,7 @@ spec:
     chart: traefik
     repoURL: https://traefik.github.io/charts
     # https://artifacthub.io/packages/helm/traefik/traefik
-    targetRevision: 37.4.0
+    targetRevision: 39.0.8
     helm:
       releaseName: traefik # Override ArgoCD application name
       # https://doc.traefik.io/traefik/setup/kubernetes/
@@ -34,7 +34,7 @@ spec:
         deployment:
           replicas: 2
         gateway:
-          enabled: false
+          enabled: true
         global:
           checkNewVersion: false
           sendAnonymousUsage: false
