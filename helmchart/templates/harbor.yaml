@@ -44,6 +44,8 @@ spec:
             className: traefik
             hosts:
               core: harbor.k8s.orb.local
+            annotations:
+              traefik.ingress.kubernetes.io/router.tls: "false"
         externalURL: harbor.k8s.orb.local
 
         # https://goharbor.io/docs/1.10/install-config/harbor-ha-helm/
