@@ -60,4 +60,4 @@ spec:
         helm:
           releaseName: '{{.path.basenameNormalized}}'
           valueFiles:
-            - '{{.path.path}}/values.yaml'
+            - 'values.yaml'
