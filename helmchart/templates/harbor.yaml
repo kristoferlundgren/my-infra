@@ -46,7 +46,7 @@ spec:
               core: harbor.k8s.orb.local
             annotations:
               traefik.ingress.kubernetes.io/router.tls: "false"
-        externalURL: harbor.k8s.orb.local
+        externalURL: http://harbor.k8s.orb.local
 
         # https://goharbor.io/docs/1.10/install-config/harbor-ha-helm/
         core:
