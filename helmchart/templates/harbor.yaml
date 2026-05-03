@@ -44,7 +44,7 @@ spec:
             className: traefik
             hosts:
               core: harbor-core.harbor.svc.cluster.local
-        externalURL: harbor-core.harbor.svc.cluster.local
+        externalURL: harbor.k8s.orb.local
 
         # https://goharbor.io/docs/1.10/install-config/harbor-ha-helm/
         core:
