@@ -4,7 +4,7 @@ kind: ApplicationSet
 # https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Controlling-Resource-Modification/
 metadata:
   namespace: argocd
-  name: projekt-deployments
+  name: my-infra
 spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
