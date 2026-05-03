@@ -32,12 +32,12 @@ spec:
     helm:
       valuesObject:
         internalTLS:
-          enabled: true
-        expose:
-          tls:
-            auto:
-              commonName: harbor-portal.harbor.svc.cluster.local
-          type: clusterIP
+          enabled: false
+        # expose:
+        #   tls:
+        #     auto:
+        #       commonName: harbor-portal.harbor.svc.cluster.local
+        #   type: clusterIP
         #   tls:
         #     enabled: false
         #   ingress:
