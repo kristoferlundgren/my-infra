@@ -34,14 +34,14 @@ spec:
         internalTLS:
           enabled: false
         expose:
-          type: ingress
-          tls:
-            enabled: false
-          ingress:
-            className: nginx
-            hosts:
-              core: harbor-core.k8s.orb.local
-        externalURL: http://harbor-portal.harbor.svc.cluster.local/
+          type: clusterIP
+        #   tls:
+        #     enabled: false
+        #   ingress:
+        #     className: traefik
+        #     hosts:
+        #       core: harbor-core.k8s.orb.local
+        # externalURL: http://harbor-portal.harbor.svc.cluster.local/
 
         # https://goharbor.io/docs/1.10/install-config/harbor-ha-helm/
         core:
