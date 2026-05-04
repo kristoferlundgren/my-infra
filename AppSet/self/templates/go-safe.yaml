@@ -1,3 +1,0 @@
-# Include file ../go-safe/ApplicationSet.yaml without parsing go-tamplating.
-
-{{- $.Files.Get "go-safe/ApplicationSet.yaml" | indent 0 -}}
