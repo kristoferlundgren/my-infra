@@ -13,9 +13,9 @@ spec:
       repoURL: https://github.com/kristoferlundgren/my-infra
       revision: release/staging
       requeueAfterSeconds: 60 # Pull repo every x seconds
-      directories:
-      - path: AppSet/self
-      - path: AppSet/apps/*
+      files:
+      - path: AppSet/self/helmchart.yaml
+      - path: AppSet/apps/*/helmchart.yaml
       values:
         applicationNamespace: infra
         applicationProject: infra
