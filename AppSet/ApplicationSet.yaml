@@ -1,3 +1,4 @@
+---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 # https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Controlling-Resource-Modification/
@@ -39,12 +40,12 @@ spec:
       annotations:
         argocd.argoproj.io/compare-options: ServerSideDiff=true,IncludeMutationWebhook=true,IgnoreExtraneous
         argocd.argoproj.io/sync-wave: "-500" # Created first, destroyed last
+        basenameNormalized: '{{.path.basenameNormalized}}'
+        basename: '{{.path.basename}}'
       finalizers:
         # https://argo-cd.readthedocs.io/en/latest/user-guide/app_deletion/#about-the-deletion-finalizer
         - resources-finalizer.argocd.argoproj.io
       name: '{{.values.namespace}}.{{.path.basenameNormalized | lower}}'
-      basenameNormalized: '{{.path.basenameNormalized}}'
-      basename: '{{.path.basename}}'
     spec:
       project: '{{.values.applicationProject}}'
       syncPolicy:
