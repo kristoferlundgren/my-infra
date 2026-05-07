@@ -36,7 +36,7 @@ spec:
         - /spec/syncPolicy
   syncPolicy:
     # https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Controlling-Resource-Modification/#managed-applications-modification-policies
-    applicationsSync: create-only # create-only, create-update, create-delete, sync (default)
+    applicationsSync: sync # create-only, create-update, create-delete, sync (default)
   template:
     metadata:
       annotations:
