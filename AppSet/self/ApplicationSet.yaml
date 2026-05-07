@@ -9,13 +9,17 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
+  # https://argo-cd.readthedocs.io/en/latest/operator-manual/applicationset/Generators-Git/
   - git:
       repoURL: https://github.com/kristoferlundgren/my-infra
       revision: release/staging
       requeueAfterSeconds: 60 # Pull repo every x seconds
       files:
+      # TODO: Enable improved globbing
+      # https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Generators-Git-File-Globbing/#enabling-the-new-globbing
       - path: AppSet/self/helmchart.yaml
       - path: AppSet/apps/*/helmchart.yaml
+      - path: AppSet/apps/*/*.helmchart.yaml
       values:
         applicationNamespace: infra
         applicationProject: infra
