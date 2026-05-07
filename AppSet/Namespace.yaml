@@ -1,0 +1,5 @@
+# Generate namespace for ArgoCD ApplicationSet
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{.Values.appset.namespace}}
