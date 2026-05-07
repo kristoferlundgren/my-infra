@@ -17,11 +17,12 @@ spec:
       files:
       # TODO: Enable improved globbing
       # https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Generators-Git-File-Globbing/#enabling-the-new-globbing
-      - path: AppSet/self/helmchart.yaml
-      - path: AppSet/apps/*/helmchart.yaml
-      - path: AppSet/apps/*/*.helmchart.yaml
+      - path: AppSet/app.yaml # Deploy the AppSet itself, to manage the rest of the apps.
+      - path: Apps/*/app.yaml # Deploy all apps
+      - path: Apps/app.template/* # Exclude app.template
+        exclude: true
+      # - path: Apps/*/*.app.yaml # Future: Support multiple app.yaml files per app.
       values:
-        applicationNamespace: infra
         applicationProject: infra
         clusterURL: https://kubernetes.default.svc
         repoURL: https://github.com/kristoferlundgren/my-infra
@@ -32,7 +33,7 @@ spec:
         - /spec/syncPolicy
   syncPolicy:
     # https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Controlling-Resource-Modification/#managed-applications-modification-policies
-    applicationsSync: create-only # create-update, create-delete sync
+    applicationsSync: create-only # create-only, create-update, create-delete, sync (default)
   template:
     metadata:
       annotations:
@@ -42,7 +43,6 @@ spec:
         # https://argo-cd.readthedocs.io/en/latest/user-guide/app_deletion/#about-the-deletion-finalizer
         - resources-finalizer.argocd.argoproj.io
       name: 'my-infra.{{.path.basenameNormalized}}'
-      namespace: '{{.values.applicationNamespace}}'
     spec:
       project: '{{.values.applicationProject}}'
       syncPolicy:
