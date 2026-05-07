@@ -55,7 +55,7 @@ spec:
           selfHeal: true
           allowEmpty: true
         syncOptions:
-          - CreateNamespace=true
+          - CreateNamespace=false
           - ServerSideApply=true
       destination:
         namespace: '{{.path.basenameNormalized}}'
