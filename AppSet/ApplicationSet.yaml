@@ -19,9 +19,11 @@ spec:
       # https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Generators-Git-File-Globbing/#enabling-the-new-globbing
       - path: AppSet/app.yaml # Deploy the AppSet itself, to manage the rest of the apps.
       - path: Apps/*/app.yaml # Deploy all apps
+      # - path: Apps/*/*.app.yaml # Future: Support multiple app.yaml files per app.
       - path: Apps/app.template/* # Exclude app.template
         exclude: true
-      # - path: Apps/*/*.app.yaml # Future: Support multiple app.yaml files per app.
+
+      # https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Generators-Git/#pass-additional-key-value-pairs-via-values-field
       values:
         applicationProject: infra
         clusterURL: https://kubernetes.default.svc
