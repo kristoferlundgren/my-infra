@@ -1,0 +1,7 @@
+# Default values for AppSet. Must be overridden by the user.
+applicationProject: argocd
+name: my-infra
+namespace: argocd
+path: Apps
+repoURL: https://github.com/kristoferlundgren/my-infra
+revision: release/staging
