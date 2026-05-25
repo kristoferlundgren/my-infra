@@ -1,0 +1,26 @@
+# https://docs.redhat.com/en/documentation/red_hat_openshift_service_mesh/3.0/html/installing/ossm-enabling-mtls#ossm-enabling-strict-mtls-whole-service-mesh_ossm-enabling-mtls
+#
+# The PeerAuthentication resource used to enforce strict mTLS is a standard Istio API that applies to both deployment models.
+# In traditional Istio setups, Envoy sidecar containers enforce this mTLS policy. In Istio ambient mode, sidecars are replaced by ztunnel (Zero Trust tunnel), a per-node proxy that handles Layer 4 traffic and enforces mTLS encryption across the mesh.
+# The documentation likely mentions sidecars because OpenShift Service Mesh 3.0 supports both architectures, and the specific section's wording still reflects the traditional sidecar model. The strict mTLS configuration will work perfectly in your ambient setup, but it will be executed by the ztunnel daemonset rather than individual sidecar containers.
+
+apiVersion: security.istio.io/v1
+kind: PeerAuthentication
+metadata:
+  name: default
+  namespace: istio-system
+spec:
+  mtls:
+    mode: STRICT
+
+# CR DestinationRule is not needed to disable mTLS for the Kubernetes API server in ambient mode.
+# Why it works differently from traditional sidecar mode:
+# •	Ambient Mode: The ztunnel node proxy automatically determines whether a destination is part of the mesh. It only upgrades traffic to mTLS (via HBONE) if the target endpoint is also running a ztunnel or waypoint proxy. Since the Kubernetes API server is external to the mesh, ztunnel automatically passes the traffic through as-is.
+# •	Traditional Sidecar Mode: Sidecars intercept all outbound traffic and often try to enforce global mTLS settings. This required explicit DestinationRule overrides (setting tls: mode: DISABLE) to prevent the sidecar from initiating mTLS with non-mesh components like the API server.
+
+###
+# Enroll Your Namespaces
+# The global policy only affects workloads that are actually part of the ambient mesh. To make the mTLS truly global for your applications, you must label the namespaces where your workloads run.
+# Important: Do not label core OpenShift or Kubernetes system namespaces (e.g., openshift-*, kube-system), as routing their traffic through the ztunnel can disrupt core cluster operations.
+# To label your application namespaces, run:
+# oc label namespace <your-app-namespace> istio.io/dataplane-mode=ambient
