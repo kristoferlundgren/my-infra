@@ -1,6 +1,0 @@
-# These files will be picked up by the ApplicationSet generator
-# and used to create Argo CD Applications.
-
-- Apps/<app-name>/app.yaml
-- Apps/<app-name>/Chart.yaml
-- Apps/<app-name>/values.yaml

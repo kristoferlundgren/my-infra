@@ -1,5 +1,0 @@
-# Include files without Helm go-tamplating
-
-{{- $.Files.Get "ApplicationSet.yaml"
-    | replace "APPSET-NAMESPACE" .Values.appset.namespace
-    | indent 0 -}}
