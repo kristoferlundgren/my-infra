@@ -1,11 +1,11 @@
 spec:
   source:
-    - chart: cert-manager
-      repoURL: https://charts.jetstack.io
-      # https://artifacthub.io/packages/helm/cert-manager/cert-manager
-      targetRevision: 1.19.0
-      helm:
-        releaseName: cert-manager
-        valueObject:
-          crds:
-            enabled: true
+    chart: cert-manager
+    repoURL: https://charts.jetstack.io
+    # https://artifacthub.io/packages/helm/cert-manager/cert-manager
+    targetRevision: 1.19.0
+    helm:
+      releaseName: cert-manager
+      valueObject:
+        crds:
+          enabled: true
