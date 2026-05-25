@@ -1,0 +1,19 @@
+# https://coder.com/docs/install/kubernetes
+# https://coder.com/blog/lessons-learned-from-v1-and-oss-to-enterprise-editions
+# https://artifacthub.io/packages/helm/coder-v2/coder
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-10"
+spec:
+  source:
+    chart: coder
+    repoURL: https://helm.coder.com/v2
+    # https://artifacthub.io/packages/helm/coder-v2/coder
+    targetRevision: 2.32.0
+    helm:
+      valuesObject:
+        coder:
+          livenessProbe:
+            enabled: true
+          service:
+            type: ClusterIP
