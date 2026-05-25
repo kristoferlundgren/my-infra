@@ -1,6 +1,13 @@
 spec:
-  source:
-    chart: cert-manager
-    repoURL: https://charts.jetstack.io
-    # https://artifacthub.io/packages/helm/cert-manager/cert-manager
-    targetRevision: 1.19.0
+  sources:
+    - chart: cert-manager
+      repoURL: https://charts.jetstack.io
+      # https://artifacthub.io/packages/helm/cert-manager/cert-manager
+      targetRevision: 1.19.0
+      helm:
+        releaseName: cert-manager
+        valueFiles:
+          - $values/Apps/cert-manager/values.yaml
+    - repoURL: https://github.com/kristoferlundgren/my-infra
+      targetRevision: release/staging
+      ref: values
