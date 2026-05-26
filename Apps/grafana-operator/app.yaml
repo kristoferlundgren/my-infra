@@ -1,0 +1,8 @@
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-10"
+spec:
+  source:
+    chart: grafana-operator
+    repoURL: oci://ghcr.io/grafana/helm-charts/grafana-operator
+    targetRevision: v5.19.4
