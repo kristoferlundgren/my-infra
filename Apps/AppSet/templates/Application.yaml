@@ -21,7 +21,7 @@ spec:
       selfHeal: true
       allowEmpty: true
     syncOptions:
-      - CreateNamespace=true
+      - CreateNamespace=false
       - ServerSideApply=true
   source:
     path: AppSet
