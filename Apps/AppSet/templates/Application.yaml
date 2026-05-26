@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: appset
+  namespace: infra
+  annotations:
+    argocd.argoproj.io/compare-options: ServerSideDiff=true,IncludeMutationWebhook=true,IgnoreExtraneous
+    argocd.argoproj.io/sync-wave: "-500"
+  finalizers:
+    # https://argo-cd.readthedocs.io/en/latest/user-guide/app_deletion/#about-the-deletion-finalizer
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: infra
+  destination:
+    namespace: infra
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+  source:
+    path: AppSet
+    repoURL: https://github.com/kristoferlundgren/my-appset
+    targetRevision: main
+    helm:
+      valuesObject:
+        applicationProject: infra
+        name: infra
+        namespace: infra
+        repoURL: https://github.com/kristoferlundgren/my-infra
+        revision: release/staging
