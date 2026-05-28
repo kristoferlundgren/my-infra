@@ -1,0 +1,6 @@
+spec:
+  source:
+    chart: sealed-secrets
+    repoURL: https://bitnami-labs.github.io/sealed-secrets/
+    # https://artifacthub.io/packages/helm/bitnami-labs/sealed-secrets
+    targetRevision:
