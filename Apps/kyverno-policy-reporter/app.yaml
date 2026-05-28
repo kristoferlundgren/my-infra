@@ -8,7 +8,7 @@ spec:
     chart: policy-reporter
     repoURL: https://kyverno.github.io/policy-reporter
     # https://artifacthub.io/packages/helm/policy-reporter/policy-reporter
-    targetRevision: 3.7.3
+    targetRevision: 3.7.4
     helm:
       valuesObject:
         ui:

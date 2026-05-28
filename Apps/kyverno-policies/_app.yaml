@@ -6,7 +6,7 @@ spec:
     # https://kyverno.io/docs/installation/methods/#install-pod-security-policies-via-helm
     # https://kyverno.io/policies/pod-security/
     # https://kubernetes.io/docs/concepts/security/pod-security-standards/
-    targetRevision: 3.7.1
+    targetRevision: 3.8.0
     helm:
       valuesObject:
         policyKind: ClusterPolicy

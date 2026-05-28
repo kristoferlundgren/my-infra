@@ -6,7 +6,7 @@ spec:
     chart: harbor
     repoURL: https://helm.goharbor.io
     # https://artifacthub.io/packages/helm/harbor/harbor
-    targetRevision: 1.18.3
+    targetRevision: 1.19.1
     helm:
       valuesObject:
         internalTLS:

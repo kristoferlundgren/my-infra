@@ -9,7 +9,7 @@ spec:
     chart: coder
     repoURL: https://helm.coder.com/v2
     # https://artifacthub.io/packages/helm/coder-v2/coder
-    targetRevision: 2.32.0
+    targetRevision: 2.33.6
     helm:
       valuesObject:
         coder:

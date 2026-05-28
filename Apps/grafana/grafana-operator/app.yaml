@@ -4,5 +4,5 @@ metadata:
 spec:
   source:
     chart: grafana-operator
-    repoURL: oci://ghcr.io/grafana/helm-charts/grafana-operator
-    targetRevision: v5.19.4
+    repoURL: https://grafana.github.io/helm-charts
+    targetRevision: 5.23.0
