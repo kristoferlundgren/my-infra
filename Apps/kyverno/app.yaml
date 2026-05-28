@@ -1,0 +1,33 @@
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-100"
+spec:
+  source:
+    chart: kyverno
+    repoURL: https://kyverno.github.io/kyverno/
+    # https://artifacthub.io/packages/helm/kyverno/kyverno
+    targetRevision: 3.7.1
+    helm:
+      valuesObject:
+        config:
+          # https://main.kyverno.io/docs/installation/platform-notes/#configuration-best-practices
+          preserve: false
+        crds:
+          install: true
+        features:
+          policyExceptions:
+            enabled: true
+            namespace: kyverno
+        grafana:
+          enabled: true
+          grafanaDashboard:
+            create: true
+        admissionController:
+          crdWatcher: true
+          replicas: 3 # High Availability
+        backgroundController:
+          replicas: 2 # High Availability
+        cleanupController:
+          replicas: 2 # High Availability
+        reportsController:
+          replicas: 2 # High Availability
