@@ -1,0 +1,8 @@
+# OBS! Spegel requires containerd
+# - https://spegel.dev/docs/getting-started/#compatibility
+spec:
+  source:
+    repoURL: oci://ghcr.io/spegel-org/helm-charts/spegel
+    path: .
+    # https://artifacthub.io/packages/helm/spegel/spegel
+    targetRevision: 0.7.1
