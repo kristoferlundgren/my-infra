@@ -1,0 +1,25 @@
+# https://docs.victoriametrics.com/victoriametrics/cluster-victoriametrics/
+# https://docs.victoriametrics.com/operator/api/#vlcluster
+apiVersion: operator.victoriametrics.com/v1
+kind: VLCluster
+metadata:
+  name: my-victorialogs
+  namespace: victorialogs
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  # https://github.com/VictoriaMetrics/VictoriaLogs/releases
+  clusterVersion: v1.50.0
+  #imagePullSecrets:
+  #  - name: my-repo-secret
+  vlstorage:
+    retentionPeriod: "1y"
+    replicaCount: 1
+  vlinsert:
+    replicaCount: 1
+  vlselect:
+    replicaCount: 1
+  requestsLoadBalancer:
+    enabled: true
+    spec:
+      replicaCount: 1
