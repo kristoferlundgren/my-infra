@@ -1,0 +1,36 @@
+spec:
+  source:
+    chart: traefik
+    repoURL: https://traefik.github.io/charts
+    # https://artifacthub.io/packages/helm/traefik/traefik
+    targetRevision: 40.2.0
+    helm:
+      # https://doc.traefik.io/traefik/setup/kubernetes/
+      valuesObject:
+        deployment:
+          replicas: 2
+        gateway:
+          enabled: true
+        global:
+          checkNewVersion: false
+          sendAnonymousUsage: false
+        ingressClass:
+          isDefaultClass: true
+        ingressRoute:
+          dashboard:
+            enabled: true
+            entryPoints:
+              - web
+          healthcheck:
+            enabled: true
+        providers:
+          kubernetesGateway:
+            enabled: true
+          kubernetesIngress:
+            ingressClass: traefik
+          kubernetesIngressNginx:
+            enabled: true
+            publishService:
+              enabled: true
+        service:
+          type: ClusterIP
