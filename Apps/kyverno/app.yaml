@@ -24,10 +24,23 @@ spec:
             create: true
         admissionController:
           crdWatcher: true
-          replicas: 3 # High Availability
+          replicas: 1 # Single-node cluster; use 3 replicas for HA.
         backgroundController:
-          replicas: 2 # High Availability
+          replicas: 1 # Single-node cluster; use 2 replicas for HA.
+          rbac:
+            clusterRole:
+              extraResources:
+                - apiGroups:
+                    - ""
+                  resources:
+                    - namespaces
+                  verbs:
+                    - get
+                    - list
+                    - watch
+                    - patch
+                    - update
         cleanupController:
-          replicas: 2 # High Availability
+          replicas: 1 # Single-node cluster; use 2 replicas for HA.
         reportsController:
-          replicas: 2 # High Availability
+          replicas: 1 # Single-node cluster; use 2 replicas for HA.
