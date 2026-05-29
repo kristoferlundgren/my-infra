@@ -7,35 +7,3 @@ spec:
     repoURL: https://helm.goharbor.io
     # https://artifacthub.io/packages/helm/harbor/harbor
     targetRevision: 1.19.1
-    helm:
-      valuesObject:
-        internalTLS:
-          enabled: false
-        expose:
-        #   tls:
-        #     auto:
-        #       commonName: harbor-portal.harbor.svc.cluster.local
-          type: clusterIP
-          tls:
-            enabled: false
-        #   ingress:
-        #     className: traefik
-        #     hosts:
-        #       core: harbor.k8s.orb.local
-        #     annotations:
-        #       traefik.ingress.kubernetes.io/router.tls: "false"
-        externalURL: http://harbor.harbor.svc.cluster.local
-
-        # https://goharbor.io/docs/1.10/install-config/harbor-ha-helm/
-        core:
-          replicas: 1 # HA>=2
-        portal:
-          replicas: 1 # HA>=2
-        jobservice:
-          replicas: 1 # HA>=2
-        registry:
-          replicas: 1 # HA>=2
-        nginx:
-          replicas: 1 # HA>=2
-        metrics:
-          enabled: true

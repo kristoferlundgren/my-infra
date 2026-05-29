@@ -10,10 +10,3 @@ spec:
     repoURL: https://helm.coder.com/v2
     # https://artifacthub.io/packages/helm/coder-v2/coder
     targetRevision: 2.33.6
-    helm:
-      valuesObject:
-        coder:
-          livenessProbe:
-            enabled: true
-          service:
-            type: ClusterIP

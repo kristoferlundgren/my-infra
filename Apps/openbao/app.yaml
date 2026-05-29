@@ -7,5 +7,3 @@ spec:
     repoURL: https://openbao.github.io/openbao-helm
     # https://artifacthub.io/packages/helm/openbao/openbao
     targetRevision: 0.28.3
-    #helm:
-    #  valuesObject:

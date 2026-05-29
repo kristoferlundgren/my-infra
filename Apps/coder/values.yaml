@@ -1,0 +1,5 @@
+coder:
+  livenessProbe:
+    enabled: true
+  service:
+    type: ClusterIP

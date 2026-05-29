@@ -9,28 +9,3 @@ spec:
     repoURL: https://kyverno.github.io/policy-reporter
     # https://artifacthub.io/packages/helm/policy-reporter/policy-reporter
     targetRevision: 3.7.4
-    helm:
-      valuesObject:
-        ui:
-          enabled: true
-          ingress:
-            enabled: true
-            className: nginx
-            hosts:
-              - host: policy-reporter-ui.k8s.orb.local
-                paths:
-                  - path: "/"
-                    pathType: ImplementationSpecific
-              - host: policy-reporter-ui.localhost
-                paths:
-                  - path: "/"
-                    pathType: ImplementationSpecific
-        plugin:
-          kyverno:
-            enabled: true
-            networkPolicy:
-              enabled: true
-        monitoring:
-          grafana:
-            grafanaDashboard:
-              enabled: true # Requires Grafana Operator

@@ -4,5 +4,3 @@ spec:
     repoURL: https://oauth2-proxy.github.io/manifests
     # https://artifacthub.io/packages/helm/oauth2-proxy/oauth2-proxy
     targetRevision: 10.6.0
-    #helm:
-    #  valuesObject:

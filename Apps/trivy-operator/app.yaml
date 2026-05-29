@@ -8,5 +8,3 @@ spec:
     # https://artifacthub.io/packages/helm/trivy-operator/trivy-operator
     # https://aquasecurity.github.io/trivy-operator/latest/getting-started/installation/helm/
     targetRevision: 0.32.1
-    # helm:
-    #   valuesObject:

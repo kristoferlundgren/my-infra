@@ -1,0 +1,35 @@
+config:
+  # https://main.kyverno.io/docs/installation/platform-notes/#configuration-best-practices
+  preserve: false
+crds:
+  install: true
+features:
+  policyExceptions:
+    enabled: true
+    namespace: kyverno
+grafana:
+  enabled: true
+  grafanaDashboard:
+    create: true
+admissionController:
+  crdWatcher: true
+  replicas: 1 # Single-node cluster; use 3 replicas for HA.
+backgroundController:
+  replicas: 1 # Single-node cluster; use 2 replicas for HA.
+  rbac:
+    clusterRole:
+      extraResources:
+        - apiGroups:
+            - ""
+          resources:
+            - namespaces
+          verbs:
+            - get
+            - list
+            - watch
+            - patch
+            - update
+cleanupController:
+  replicas: 1 # Single-node cluster; use 2 replicas for HA.
+reportsController:
+  replicas: 1 # Single-node cluster; use 2 replicas for HA.
