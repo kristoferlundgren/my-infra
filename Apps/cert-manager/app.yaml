@@ -4,7 +4,3 @@ spec:
     repoURL: https://charts.jetstack.io
     # https://artifacthub.io/packages/helm/cert-manager/cert-manager
     targetRevision: 1.20.2
-    helm:
-      valuesObject:
-        crds:
-          enabled: true
