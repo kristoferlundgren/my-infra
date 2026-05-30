@@ -2,7 +2,7 @@ ui:
   enabled: true
   ingress:
     enabled: true
-    className: nginx
+    className: traefik
     hosts:
       - host: policy-reporter-ui.k8s.orb.local
         paths:

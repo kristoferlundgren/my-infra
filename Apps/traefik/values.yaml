@@ -19,6 +19,11 @@ providers:
     enabled: true
   kubernetesIngress:
     ingressClass: traefik
+    ingressEndpoint:
+      hostname: localhost
+  kubernetesIngressNGINX:
+    enabled: true
+    publishStatusAddress: localhost
 service:
   spec:
     type: ClusterIP
