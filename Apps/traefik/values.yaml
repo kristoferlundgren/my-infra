@@ -19,10 +19,6 @@ providers:
     enabled: true
   kubernetesIngress:
     ingressClass: traefik
-# Error: values don't meet the specifications of the schema(s) in the following chart(s): traefik: - at '/providers': additional properties 'kubernetesIngressNginx' not allowed
-#   kubernetesIngressNginx:
-#     enabled: true
-#     publishService:
-#       enabled: true
 service:
-  type: ClusterIP
+  spec:
+    type: ClusterIP
