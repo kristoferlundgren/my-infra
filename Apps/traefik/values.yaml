@@ -19,6 +19,8 @@ providers:
     enabled: true
   kubernetesIngress:
     ingressClass: traefik
+    publishedService:
+      enabled: false
     ingressEndpoint:
       hostname: localhost
   kubernetesIngressNGINX:
