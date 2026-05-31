@@ -1,0 +1,4 @@
+server:
+  updateStrategyType: RollingUpdate
+  dev:
+    enabled: true
