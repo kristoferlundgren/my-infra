@@ -1,0 +1,8 @@
+spec:
+  sources:
+    - path: AppSet
+      repoURL: https://github.com/kristoferlundgren/my-appset
+      targetRevision: main
+    - path: Apps/AppSet/templates
+      repoURL: https://github.com/kristoferlundgren/my-infra
+      targetRevision: release/staging

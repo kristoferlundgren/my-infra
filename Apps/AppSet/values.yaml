@@ -1,0 +1,5 @@
+applicationProject: infra
+name: infra
+namespace: infra
+repoURL: https://github.com/kristoferlundgren/my-infra
+revision: release/staging
