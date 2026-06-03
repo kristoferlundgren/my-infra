@@ -1,5 +1,5 @@
 #!/bin/sh -ex
 
-helm template ./AppSet \
+helm template . \
   | tee /dev/stdout \
   | kubectl apply -f -

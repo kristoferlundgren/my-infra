@@ -23,14 +23,18 @@ spec:
     syncOptions:
       - CreateNamespace=false
       - ServerSideApply=true
-  source:
-    path: AppSet
-    repoURL: https://github.com/kristoferlundgren/my-appset
-    targetRevision: main
-    helm:
-      valuesObject:
-        applicationProject: infra
-        name: infra
-        namespace: infra
-        repoURL: https://github.com/kristoferlundgren/my-infra
-        revision: release/staging
+  sources:
+    - path: AppSet
+      repoURL: https://github.com/kristoferlundgren/my-appset
+      targetRevision: main
+      helm:
+        releaseName: appset
+        valueFiles:
+          - $values/Apps/AppSet/values.yaml
+        ignoreMissingValueFiles: true
+    - path: Apps/AppSet/templates
+      repoURL: https://github.com/kristoferlundgren/my-infra
+      targetRevision: release/staging
+    - repoURL: https://github.com/kristoferlundgren/my-infra
+      targetRevision: release/staging
+      ref: values
