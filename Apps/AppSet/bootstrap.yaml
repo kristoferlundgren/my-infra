@@ -3,25 +3,13 @@ kind: Application
 metadata:
   name: infra.appset
   namespace: infra
-  annotations:
-    argocd.argoproj.io/compare-options: ServerSideDiff=true,IncludeMutationWebhook=true,IgnoreExtraneous
-    argocd.argoproj.io/sync-wave: "-500"
-  finalizers:
-    # https://argo-cd.readthedocs.io/en/latest/user-guide/app_deletion/#about-the-deletion-finalizer
-    - resources-finalizer.argocd.argoproj.io
 spec:
   project: infra
   destination:
     namespace: infra
     server: https://kubernetes.default.svc
   syncPolicy:
-    automated:
-      enabled: true
-      prune: true
-      selfHeal: true
-      allowEmpty: true
     syncOptions:
-      - CreateNamespace=false
       - ServerSideApply=true
   sources:
     - path: AppSet

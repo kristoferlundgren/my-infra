@@ -3,4 +3,3 @@ kind: Kustomization
 
 resources:
     - AppProject.yaml
-    - Namespace.yaml
