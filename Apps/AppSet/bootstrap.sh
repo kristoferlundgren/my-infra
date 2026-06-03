@@ -1,5 +1,5 @@
 #!/bin/sh -ex
 
-helm template . \
+cat bootstrap.yaml \
   | tee /dev/stdout \
   | kubectl apply -f -
