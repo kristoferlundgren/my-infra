@@ -32,7 +32,7 @@ spec:
         valueFiles:
           - $values/Apps/AppSet/values.yaml
         ignoreMissingValueFiles: true
-    - path: Apps/AppSet/templates
+    - path: Apps/AppSet/dependencies
       repoURL: https://github.com/kristoferlundgren/my-infra
       targetRevision: release/staging
     - repoURL: https://github.com/kristoferlundgren/my-infra

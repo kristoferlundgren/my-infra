@@ -4,6 +4,6 @@ spec:
     repoURL: https://github.com/kristoferlundgren/my-appset
     targetRevision: main
   sources:
-    - path: Apps/AppSet/templates
+    - path: Apps/AppSet/dependencies
       repoURL: https://github.com/kristoferlundgren/my-infra
       targetRevision: release/staging
