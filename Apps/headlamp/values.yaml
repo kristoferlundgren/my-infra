@@ -1,5 +1,5 @@
 config:
   oidc:
-    clientID: "e642d27a-64ed-4b5c-88e4-768f106be4ea"
-    clientSecret: ""
-    issuerURL: https://login.microsoftonline.com/d558422f-c0b7-4ea8-8f9a-f12676f3f386/oauth2/v2.0/authorize
+    secret:
+      create: false
+      name: oidc
