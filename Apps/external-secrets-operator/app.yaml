@@ -1,0 +1,7 @@
+# https://charts.external-secrets.io/
+spec:
+  source:
+    chart: external-secrets
+    repoURL: https://charts.external-secrets.io/
+    # https://artifacthub.io/packages/helm/external-secrets-operator/external-secrets
+    targetRevision: 2.5.0
