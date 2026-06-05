@@ -1,0 +1,6 @@
+spec:
+  source:
+    chart: headlamp
+    repoURL: https://kubernetes-sigs.github.io/headlamp/
+    # https://artifacthub.io/packages/helm/headlamp/headlamp
+    targetRevision: 0.42.0
