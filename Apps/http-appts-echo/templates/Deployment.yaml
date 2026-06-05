@@ -1,0 +1,23 @@
+# https://hub.docker.com/r/mendhak/http-https-echo
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: http-https-echo
+  labels:
+    app: http-https-echo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: http-https-echo
+  template:
+    metadata:
+      labels:
+        app: http-https-echo
+    spec:
+      containers:
+      - name: http-https-echo
+        image: mendhak/http-https-echo:latest
+        ports:
+        - containerPort: 8080
+        - containerPort: 8443

@@ -1,0 +1,17 @@
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: http-https-echo
+  labels:
+    app: http-https-echo
+spec:
+  selector:
+    app: http-https-echo
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+  - protocol: TCP
+    port: 443
+    targetPort: 8443
