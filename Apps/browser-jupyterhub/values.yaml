@@ -26,6 +26,7 @@ hub:
       storage: 1Gi
   extraConfig:
     browser.py: |
+      c.Authenticator.allow_all = True
       c.KubeSpawner.port = 3000
       c.KubeSpawner.http_timeout = 120
 
