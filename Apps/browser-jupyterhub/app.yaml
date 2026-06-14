@@ -1,0 +1,9 @@
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "50"
+spec:
+  source:
+    chart: jupyterhub
+    repoURL: https://jupyterhub.github.io/helm-chart
+    # https://artifacthub.io/packages/helm/jupyterhub/jupyterhub
+    targetRevision: 4.3.5

@@ -1,0 +1,106 @@
+proxy:
+  service:
+    type: ClusterIP
+  https:
+    enabled: false
+  chp:
+    networkPolicy:
+      enabled: false
+
+ingress:
+  enabled: false
+
+hub:
+  redirectToServer: true
+  command:
+    - /bin/sh
+    - -c
+  args:
+    - python3 -m pip install --user --no-cache-dir jupyterhub-tmpauthenticator==1.0.0 && exec jupyterhub --config /usr/local/etc/jupyterhub/jupyterhub_config.py --upgrade-db
+  config:
+    JupyterHub:
+      authenticator_class: tmp
+  db:
+    type: sqlite-pvc
+    pvc:
+      storage: 1Gi
+  extraConfig:
+    browser.py: |
+      c.KubeSpawner.port = 3000
+      c.KubeSpawner.http_timeout = 120
+
+      def browser_environment(spawner):
+          return {
+              "PUID": "1000",
+              "PGID": "1000",
+              "TZ": "Europe/Stockholm",
+              "CHROME_CLI": "--app=http://argocd-server.argocd.svc.cluster.local/ --no-first-run --disable-dev-shm-usage",
+              "CUSTOM_PORT": "3000",
+              "HARDEN_DESKTOP": "true",
+              "HARDEN_OPENBOX": "true",
+              "NO_DECOR": "true",
+              "RESTART_APP": "true",
+              "SELKIES_FILE_TRANSFERS": "none",
+              "SELKIES_COMMAND_ENABLED": "false|locked",
+              "SELKIES_UI_SHOW_LOGO": "false|locked",
+              "SELKIES_UI_SHOW_SIDEBAR": "false|locked",
+              "SELKIES_UI_SIDEBAR_SHOW_APPS": "false|locked",
+              "SELKIES_UI_SIDEBAR_SHOW_FILES": "false|locked",
+              "SELKIES_UI_SIDEBAR_SHOW_SHARING": "false|locked",
+              "SUBFOLDER": spawner.server.base_url,
+              "TITLE": "Argo CD Browser",
+          }
+
+      c.Spawner.environment = browser_environment
+  networkPolicy:
+    enabled: false
+
+singleuser:
+  image:
+    name: lscr.io/linuxserver/chromium
+    tag: latest
+    pullPolicy: IfNotPresent
+  cmd: null
+  defaultUrl: /
+  uid: 0
+  fsGid: 0
+  allowPrivilegeEscalation: true
+  cloudMetadata:
+    blockWithIptables: false
+  storage:
+    type: none
+    extraVolumes:
+      - name: dshm
+        emptyDir:
+          medium: Memory
+          sizeLimit: 1Gi
+    extraVolumeMounts:
+      - name: dshm
+        mountPath: /dev/shm
+  cpu:
+    guarantee: 0.25
+    limit: 2
+  memory:
+    guarantee: 1Gi
+    limit: 4Gi
+  networkPolicy:
+    enabled: false
+
+cull:
+  enabled: true
+  timeout: 1800
+  every: 300
+  users: true
+  removeNamedServers: true
+
+prePuller:
+  hook:
+    enabled: false
+  continuous:
+    enabled: false
+
+scheduling:
+  userScheduler:
+    enabled: false
+  userPlaceholder:
+    enabled: false

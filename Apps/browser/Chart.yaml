@@ -1,0 +1,5 @@
+apiVersion: v2
+name: browser
+description: OrbStack-friendly service alias for browser sessions.
+type: application
+version: 0.1.0

@@ -1,0 +1,2 @@
+browser:
+  externalName: proxy-public.browser-jupyterhub.svc.cluster.local
