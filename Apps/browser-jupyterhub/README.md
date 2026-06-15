@@ -10,6 +10,7 @@ The user-facing alias lives in `Apps/browser` and points `http://browser.browser
 - Browser image: `lscr.io/linuxserver/chromium:latest`
 - Authenticator: `jupyterhub-tmpauthenticator`
 - Target URL opened in Chromium: `https://argocd-server.argocd.svc.cluster.local/`
+- Chromium launch mode: kiosk, with Argo CD's internal TLS certificate pinned by SPKI hash.
 - Idle cull timeout: 30 minutes
 - User storage: disabled
 

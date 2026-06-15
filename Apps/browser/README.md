@@ -26,6 +26,7 @@ No externally reachable URL is configured.
 ## Session Behavior
 
 - `/argocd` is an alias for the default Argo CD browser session.
+- The spawned Chromium session runs in kiosk mode and pins Argo CD's internal TLS certificate by SPKI hash.
 - Session behavior is configured in `Apps/browser-jupyterhub/values.yaml`.
 - The browser proxy generates a self-signed TLS certificate at pod startup; no TLS private key is stored in Git.
 
