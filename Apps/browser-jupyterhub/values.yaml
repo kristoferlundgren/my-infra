@@ -30,29 +30,26 @@ hub:
       c.KubeSpawner.port = 3000
       c.KubeSpawner.http_timeout = 120
 
-      def browser_environment(spawner):
-          return {
-              "PUID": "1000",
-              "PGID": "1000",
-              "TZ": "Europe/Stockholm",
-              "CHROME_CLI": "--app=http://argocd-server.argocd.svc.cluster.local/ --no-first-run --disable-dev-shm-usage",
-              "CUSTOM_PORT": "3000",
-              "HARDEN_DESKTOP": "true",
-              "HARDEN_OPENBOX": "true",
-              "NO_DECOR": "true",
-              "RESTART_APP": "true",
-              "SELKIES_FILE_TRANSFERS": "none",
-              "SELKIES_COMMAND_ENABLED": "false|locked",
-              "SELKIES_UI_SHOW_LOGO": "false|locked",
-              "SELKIES_UI_SHOW_SIDEBAR": "false|locked",
-              "SELKIES_UI_SIDEBAR_SHOW_APPS": "false|locked",
-              "SELKIES_UI_SIDEBAR_SHOW_FILES": "false|locked",
-              "SELKIES_UI_SIDEBAR_SHOW_SHARING": "false|locked",
-              "SUBFOLDER": spawner.server.base_url,
-              "TITLE": "Argo CD Browser",
-          }
-
-      c.Spawner.environment = browser_environment
+      c.KubeSpawner.environment = {
+          "PUID": "1000",
+          "PGID": "1000",
+          "TZ": "Europe/Stockholm",
+          "CHROME_CLI": "--app=http://argocd-server.argocd.svc.cluster.local/ --no-first-run --disable-dev-shm-usage",
+          "CUSTOM_PORT": "3000",
+          "HARDEN_DESKTOP": "true",
+          "HARDEN_OPENBOX": "true",
+          "NO_DECOR": "true",
+          "RESTART_APP": "true",
+          "SELKIES_FILE_TRANSFERS": "none",
+          "SELKIES_COMMAND_ENABLED": "false|locked",
+          "SELKIES_UI_SHOW_LOGO": "false|locked",
+          "SELKIES_UI_SHOW_SIDEBAR": "false|locked",
+          "SELKIES_UI_SIDEBAR_SHOW_APPS": "false|locked",
+          "SELKIES_UI_SIDEBAR_SHOW_FILES": "false|locked",
+          "SELKIES_UI_SIDEBAR_SHOW_SHARING": "false|locked",
+          "SUBFOLDER": "$(JUPYTERHUB_SERVICE_PREFIX)",
+          "TITLE": "Argo CD Browser",
+      }
   networkPolicy:
     enabled: false
 
@@ -82,8 +79,8 @@ singleuser:
     guarantee: 0.25
     limit: 2
   memory:
-    guarantee: 1Gi
-    limit: 4Gi
+    guarantee: 1G
+    limit: 4G
   networkPolicy:
     enabled: false
 
