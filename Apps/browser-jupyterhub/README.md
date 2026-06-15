@@ -13,6 +13,7 @@ The user-facing alias lives in `Apps/browser` and exposes a landing page at `htt
 - `argocd`: `https://argocd-server.argocd.svc.cluster.local/`
 - `headlamp`: `http://headlamp.headlamp.svc.cluster.local/`
 - Chromium launch mode: kiosk. Argo CD sessions pin Argo CD's internal TLS certificate by SPKI hash.
+- Clipboard synchronization: enabled through the Selkies sidebar. File transfers, sharing, audio, microphone, gamepad, apps, and terminal command features remain disabled.
 - Idle cull timeout: 30 minutes
 - User storage: disabled
 - Named servers: enabled; every endpoint request creates a new randomly named server and pod.
