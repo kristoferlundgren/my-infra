@@ -14,6 +14,9 @@ The user-facing alias lives in `Apps/browser` and exposes a landing page at `htt
 - `headlamp`: `http://headlamp.headlamp.svc.cluster.local/`
 - Chromium launch mode: kiosk. Argo CD sessions pin Argo CD's internal TLS certificate by SPKI hash.
 - Clipboard synchronization: enabled through the Selkies sidebar. File transfers, sharing, audio, microphone, gamepad, apps, and terminal command features remain disabled.
+- Zen Browser on macOS requires `dom.events.testing.asyncClipboard=true` in `about:config` for direct paste from the local clipboard into a session.
+- Chromium password manager and address/card autofill prompts are disabled by managed policy in spawned browser pods.
+- `Cmd-L` cannot focus the remote Chromium address bar while kiosk mode is enabled. If `Cmd-L` should focus Zen's local address bar, first release focus from the Selkies canvas, for example by pressing `Esc` or clicking outside the remote display.
 - Idle cull timeout: 30 minutes
 - User storage: disabled
 - Named servers: enabled; every endpoint request creates a new randomly named server and pod.

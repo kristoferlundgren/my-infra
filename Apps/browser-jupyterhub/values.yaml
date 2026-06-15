@@ -125,6 +125,13 @@ singleuser:
     name: lscr.io/linuxserver/chromium
     tag: latest
     pullPolicy: IfNotPresent
+  extraFiles:
+    chromium-browser-policy:
+      mountPath: /etc/chromium/policies/managed/browser.json
+      data:
+        PasswordManagerEnabled: false
+        AutofillAddressEnabled: false
+        AutofillCreditCardEnabled: false
   cmd: null
   defaultUrl: /
   uid: 0
