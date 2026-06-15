@@ -127,6 +127,15 @@ hub:
       c.JupyterHub.extra_handlers = [
           (r"/browser/([^/]+)", BrowserTargetHandler),
       ]
+
+      c.JupyterHub.load_roles.append({
+          "name": "user",
+          "scopes": [
+              "users!user",
+              "servers!user",
+              "access:servers!user",
+          ],
+      })
   networkPolicy:
     enabled: false
 

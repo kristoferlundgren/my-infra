@@ -21,6 +21,7 @@ The user-facing alias lives in `Apps/browser` and exposes a landing page at `htt
 - User storage: disabled
 - Named servers: enabled; every endpoint request creates a new randomly named server and pod.
 - Spawned session pods are labeled with `browser-target=<target>` and annotated with `browser-target-url=<target URL>`.
+- JupyterHub user API token creation is disabled by overriding the default user role without the `tokens!user` scope.
 
 ## URLs
 
@@ -50,6 +51,7 @@ Expected checks:
 - `https://browser.browser.svc.cluster.local/headlamp` starts a Headlamp Chromium pod.
 - Newly spawned session pods include target metadata, for example label `browser-target=headlamp` and annotation `browser-target-url=http://headlamp.headlamp.svc.cluster.local/`.
 - The spawned session reaches Argo CD at `https://argocd-server.argocd.svc.cluster.local/`.
+- JupyterHub user token creation through `/hub/token` or `/hub/api/users/<user>/tokens` is unavailable.
 - Inactive user pods are removed after the configured cull timeout.
 
 ## Repo Files

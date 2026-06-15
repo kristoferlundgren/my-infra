@@ -33,6 +33,7 @@ No externally reachable URL is configured.
 - Spawned Chromium sessions run in kiosk mode. Argo CD sessions pin Argo CD's internal TLS certificate by SPKI hash.
 - Session behavior is configured in `Apps/browser-jupyterhub/values.yaml`.
 - The browser proxy generates a self-signed TLS certificate at pod startup; no TLS private key is stored in Git.
+- The browser proxy blocks JupyterHub user token UI/API routes as defense in depth; token permissions are removed in `Apps/browser-jupyterhub`.
 
 ## Verification Notes
 
@@ -46,6 +47,7 @@ Expected checks:
 - A second `/argocd` visit starts a second Chromium pod rather than reusing the first.
 - `https://browser.browser.svc.cluster.local/headlamp` starts a Headlamp Chromium pod.
 - The spawned session reaches Argo CD at `https://argocd-server.argocd.svc.cluster.local/`.
+- `https://browser.browser.svc.cluster.local/hub/token` and user token API requests return `403` through the browser proxy.
 - Inactive user pods are removed after the configured cull timeout.
 
 ## Repo Files
