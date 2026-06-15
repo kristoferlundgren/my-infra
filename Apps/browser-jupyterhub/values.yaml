@@ -41,10 +41,12 @@ hub:
       BROWSER_TARGETS = {
           "argocd": {
               "title": "Argo CD Browser",
+              "target_url": "https://argocd-server.argocd.svc.cluster.local/",
               "chrome_cli": "--kiosk https://argocd-server.argocd.svc.cluster.local/ --ignore-certificate-errors-spki-list=VMWLgWVQrm8Db9dpFwDBpojkjaYnAfG3zONhiCCItPs= --no-first-run --no-default-browser-check --disable-dev-shm-usage --disable-session-crashed-bubble --disable-features=Translate,PasswordManagerOnboarding",
           },
           "headlamp": {
               "title": "Headlamp Browser",
+              "target_url": "http://headlamp.headlamp.svc.cluster.local/",
               "chrome_cli": "--kiosk http://headlamp.headlamp.svc.cluster.local/ --no-first-run --no-default-browser-check --disable-dev-shm-usage --disable-session-crashed-bubble --disable-features=Translate,PasswordManagerOnboarding",
           },
       }
@@ -100,6 +102,14 @@ hub:
           environment["CHROME_CLI"] = target_config["chrome_cli"]
           environment["TITLE"] = target_config["title"]
           spawner.environment = environment
+
+          labels = dict(getattr(spawner, "extra_labels", {}) or {})
+          labels["browser-target"] = target
+          spawner.extra_labels = labels
+
+          annotations = dict(getattr(spawner, "extra_annotations", {}) or {})
+          annotations["browser-target-url"] = target_config["target_url"]
+          spawner.extra_annotations = annotations
 
       c.KubeSpawner.environment = BROWSER_BASE_ENVIRONMENT.copy()
       c.Spawner.pre_spawn_hook = configure_browser_target

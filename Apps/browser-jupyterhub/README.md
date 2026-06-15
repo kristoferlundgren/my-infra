@@ -20,6 +20,7 @@ The user-facing alias lives in `Apps/browser` and exposes a landing page at `htt
 - Idle cull timeout: 30 minutes
 - User storage: disabled
 - Named servers: enabled; every endpoint request creates a new randomly named server and pod.
+- Spawned session pods are labeled with `browser-target=<target>` and annotated with `browser-target-url=<target URL>`.
 
 ## URLs
 
@@ -47,6 +48,7 @@ Expected checks:
 - `https://browser.browser.svc.cluster.local/argocd` redirects through temporary login/spawn and starts a new Chromium pod.
 - Repeating `/argocd` starts another Chromium pod rather than reusing the first.
 - `https://browser.browser.svc.cluster.local/headlamp` starts a Headlamp Chromium pod.
+- Newly spawned session pods include target metadata, for example label `browser-target=headlamp` and annotation `browser-target-url=http://headlamp.headlamp.svc.cluster.local/`.
 - The spawned session reaches Argo CD at `https://argocd-server.argocd.svc.cluster.local/`.
 - Inactive user pods are removed after the configured cull timeout.
 
