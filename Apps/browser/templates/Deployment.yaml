@@ -62,6 +62,9 @@ spec:
             - name: config
               mountPath: /etc/nginx/conf.d/default.conf
               subPath: default.conf
+            - name: config
+              mountPath: /usr/share/nginx/html/index.html
+              subPath: index.html
             - name: tls
               mountPath: /etc/browser-tls
               readOnly: true

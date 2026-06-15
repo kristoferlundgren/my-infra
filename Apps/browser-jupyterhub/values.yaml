@@ -11,6 +11,8 @@ ingress:
   enabled: false
 
 hub:
+  allowNamedServers: true
+  namedServerLimitPerUser: 0
   redirectToServer: true
   command:
     - /bin/sh
@@ -26,15 +28,31 @@ hub:
       storage: 1Gi
   extraConfig:
     browser.py: |
+      import uuid
+
+      from jupyterhub.handlers.base import BaseHandler
+      from tornado import web
+      from tornado.escape import url_escape
+
       c.Authenticator.allow_all = True
       c.KubeSpawner.port = 3000
       c.KubeSpawner.http_timeout = 120
 
-      c.KubeSpawner.environment = {
+      BROWSER_TARGETS = {
+          "argocd": {
+              "title": "Argo CD Browser",
+              "chrome_cli": "--kiosk https://argocd-server.argocd.svc.cluster.local/ --ignore-certificate-errors-spki-list=VMWLgWVQrm8Db9dpFwDBpojkjaYnAfG3zONhiCCItPs= --no-first-run --no-default-browser-check --disable-dev-shm-usage --disable-session-crashed-bubble --disable-features=Translate,PasswordManagerOnboarding",
+          },
+          "headlamp": {
+              "title": "Headlamp Browser",
+              "chrome_cli": "--kiosk http://headlamp.headlamp.svc.cluster.local/ --no-first-run --no-default-browser-check --disable-dev-shm-usage --disable-session-crashed-bubble --disable-features=Translate,PasswordManagerOnboarding",
+          },
+      }
+
+      BROWSER_BASE_ENVIRONMENT = {
           "PUID": "1000",
           "PGID": "1000",
           "TZ": "Europe/Stockholm",
-          "CHROME_CLI": "--kiosk https://argocd-server.argocd.svc.cluster.local/ --ignore-certificate-errors-spki-list=VMWLgWVQrm8Db9dpFwDBpojkjaYnAfG3zONhiCCItPs= --no-first-run --no-default-browser-check --disable-dev-shm-usage --disable-session-crashed-bubble --disable-features=Translate,PasswordManagerOnboarding",
           "CUSTOM_PORT": "3000",
           "HARDEN_DESKTOP": "true",
           "HARDEN_OPENBOX": "true",
@@ -64,8 +82,41 @@ hub:
           "SELKIES_UI_SIDEBAR_SHOW_SHARING": "false|locked",
           "SELKIES_UI_SIDEBAR_SHOW_SOFT_BUTTONS": "false|locked",
           "SUBFOLDER": "$(JUPYTERHUB_SERVICE_PREFIX)",
-          "TITLE": "Argo CD Browser",
       }
+
+      def browser_target_from_server_name(server_name):
+          for target in BROWSER_TARGETS:
+              if server_name.startswith(f"{target}-"):
+                  return target
+          return None
+
+      async def configure_browser_target(spawner):
+          target = browser_target_from_server_name(spawner.name)
+          if target is None:
+              raise ValueError(f"Unknown browser target for named server {spawner.name!r}")
+
+          target_config = BROWSER_TARGETS[target]
+          environment = BROWSER_BASE_ENVIRONMENT.copy()
+          environment["CHROME_CLI"] = target_config["chrome_cli"]
+          environment["TITLE"] = target_config["title"]
+          spawner.environment = environment
+
+      c.KubeSpawner.environment = BROWSER_BASE_ENVIRONMENT.copy()
+      c.Spawner.pre_spawn_hook = configure_browser_target
+
+      class BrowserTargetHandler(BaseHandler):
+          @web.authenticated
+          async def get(self, target):
+              if target not in BROWSER_TARGETS:
+                  raise web.HTTPError(404, f"Unknown browser target: {target}")
+
+              server_name = f"{target}-{uuid.uuid4().hex}"
+              username = self.current_user.name
+              self.redirect(f"/hub/spawn/{url_escape(username)}/{url_escape(server_name)}")
+
+      c.JupyterHub.extra_handlers = [
+          (r"/browser/([^/]+)", BrowserTargetHandler),
+      ]
   networkPolicy:
     enabled: false
 

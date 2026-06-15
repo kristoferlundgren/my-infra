@@ -3,6 +3,13 @@ browser:
   image:
     repository: nginx
     tag: 1.27-alpine
+  endpoints:
+    - path: argocd
+      title: Argo CD
+      description: Open an isolated browser session for Argo CD.
+    - path: headlamp
+      title: Headlamp
+      description: Open an isolated browser session for Headlamp.
   tls:
     commonName: browser.browser.svc.cluster.local
     dnsNames:
