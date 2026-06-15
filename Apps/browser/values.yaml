@@ -1,2 +1,11 @@
 browser:
-  externalName: proxy-public.browser-jupyterhub.svc.cluster.local
+  upstream: proxy-public.browser-jupyterhub.svc.cluster.local
+  image:
+    repository: nginx
+    tag: 1.27-alpine
+  tls:
+    commonName: browser.browser.svc.cluster.local
+    dnsNames:
+      - browser.browser.svc.cluster.local
+      - browser.browser
+      - browser

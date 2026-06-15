@@ -7,8 +7,14 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name | quote }}
     app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
 spec:
-  type: ExternalName
-  externalName: {{ .Values.browser.externalName | quote }}
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: browser
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
   ports:
     - name: http
       port: 80
+      targetPort: http
+    - name: https
+      port: 443
+      targetPort: https

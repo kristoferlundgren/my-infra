@@ -9,7 +9,7 @@ The user-facing alias lives in `Apps/browser` and points `http://browser.browser
 - Chart: `jupyterhub` from `https://jupyterhub.github.io/helm-chart`
 - Browser image: `lscr.io/linuxserver/chromium:latest`
 - Authenticator: `jupyterhub-tmpauthenticator`
-- Target URL opened in Chromium: `http://argocd-server.argocd.svc.cluster.local/`
+- Target URL opened in Chromium: `https://argocd-server.argocd.svc.cluster.local/`
 - Idle cull timeout: 30 minutes
 - User storage: disabled
 
@@ -17,7 +17,10 @@ The user-facing alias lives in `Apps/browser` and points `http://browser.browser
 
 Cluster-internal and OrbStack host-accessible URL through the alias app:
 
-- `http://browser.browser.svc.cluster.local/`
+- `https://browser.browser.svc.cluster.local/`
+- `https://browser.browser.svc.cluster.local/argocd`
+
+HTTP redirects to HTTPS through the alias app.
 
 Native JupyterHub proxy service URL:
 
@@ -31,9 +34,8 @@ Configuration has been prepared for OrbStack service-DNS access, but runtime HTT
 
 Expected checks:
 
-- `http://browser.browser.svc.cluster.local/` resolves to this app's `proxy-public` service.
-- The JupyterHub endpoint redirects through temporary login/spawn and starts a Chromium pod.
-- The spawned session reaches Argo CD at `http://argocd-server.argocd.svc.cluster.local/`.
+- `https://browser.browser.svc.cluster.local/argocd` redirects through temporary login/spawn and starts a Chromium pod.
+- The spawned session reaches Argo CD at `https://argocd-server.argocd.svc.cluster.local/`.
 - Inactive user pods are removed after the configured cull timeout.
 
 ## Repo Files
