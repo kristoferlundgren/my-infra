@@ -12,6 +12,7 @@ The user-facing alias lives in `Apps/browser` and exposes a landing page at `htt
 - Browser targets:
 - `argocd`: `https://argocd-server.argocd.svc.cluster.local/`
 - `headlamp`: `http://headlamp.headlamp.svc.cluster.local/`
+- `svt`: `https://svt.se/`
 - Chromium launch mode: kiosk. Argo CD sessions pin Argo CD's internal TLS certificate by SPKI hash.
 - Clipboard synchronization: enabled through the Selkies sidebar. File transfers, sharing, audio, microphone, gamepad, apps, and terminal command features remain disabled.
 - Zen Browser on macOS requires `dom.events.testing.asyncClipboard=true` in `about:config` for direct paste from the local clipboard into a session, and `permissions.default.shortcuts=2` to keep local shortcuts such as `Cmd-L` from being captured by Selkies.
@@ -30,6 +31,7 @@ Cluster-internal and OrbStack host-accessible URL through the alias app:
 - `https://browser.browser.svc.cluster.local/`
 - `https://browser.browser.svc.cluster.local/argocd`
 - `https://browser.browser.svc.cluster.local/headlamp`
+- `https://browser.browser.svc.cluster.local/svt`
 
 HTTP redirects to HTTPS through the alias app.
 
@@ -49,6 +51,7 @@ Expected checks:
 - `https://browser.browser.svc.cluster.local/argocd` redirects through temporary login/spawn and starts a new Chromium pod.
 - Repeating `/argocd` starts another Chromium pod rather than reusing the first.
 - `https://browser.browser.svc.cluster.local/headlamp` starts a Headlamp Chromium pod.
+- `https://browser.browser.svc.cluster.local/svt` starts an SVT Chromium pod.
 - Newly spawned session pods include target metadata, for example label `browser-target=headlamp` and annotation `browser-target-url=http://headlamp.headlamp.svc.cluster.local/`.
 - The spawned session reaches Argo CD at `https://argocd-server.argocd.svc.cluster.local/`.
 - JupyterHub user token creation through `/hub/token` or `/hub/api/users/<user>/tokens` is unavailable.

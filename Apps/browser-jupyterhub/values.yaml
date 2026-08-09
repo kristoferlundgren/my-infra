@@ -49,6 +49,11 @@ hub:
               "target_url": "http://headlamp.headlamp.svc.cluster.local/",
               "chrome_cli": "--kiosk http://headlamp.headlamp.svc.cluster.local/ --no-first-run --no-default-browser-check --disable-dev-shm-usage --disable-session-crashed-bubble --disable-features=Translate,PasswordManagerOnboarding",
           },
+          "svt": {
+              "title": "SVT Browser",
+              "target_url": "https://svt.se/",
+              "chrome_cli": "--kiosk https://svt.se/ --no-first-run --no-default-browser-check --disable-dev-shm-usage --disable-session-crashed-bubble --disable-features=Translate,PasswordManagerOnboarding",
+          },
       }
 
       BROWSER_BASE_ENVIRONMENT = {

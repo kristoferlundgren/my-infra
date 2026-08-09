@@ -11,6 +11,7 @@ Cluster-internal and OrbStack host-accessible URL:
 - `https://browser.browser.svc.cluster.local/`
 - `https://browser.browser.svc.cluster.local/argocd`
 - `https://browser.browser.svc.cluster.local/headlamp`
+- `https://browser.browser.svc.cluster.local/svt`
 
 HTTP redirects to HTTPS.
 
@@ -22,13 +23,14 @@ Configured browser targets open through cluster DNS:
 
 - `https://argocd-server.argocd.svc.cluster.local/`
 - `http://headlamp.headlamp.svc.cluster.local/`
+- `https://svt.se/`
 
 No externally reachable URL is configured.
 
 ## Session Behavior
 
 - `/` serves a landing page and does not start a browser pod.
-- `/argocd` and `/headlamp` each request a fresh isolated named JupyterHub server.
+- `/argocd`, `/headlamp`, and `/svt` each request a fresh isolated named JupyterHub server.
 - Every endpoint visit creates a separate Kubernetes browser pod, even from the same browser profile.
 - Spawned Chromium sessions run in kiosk mode. Argo CD sessions pin Argo CD's internal TLS certificate by SPKI hash.
 - Session behavior is configured in `Apps/browser-jupyterhub/values.yaml`.
@@ -46,6 +48,7 @@ Expected checks:
 - `https://browser.browser.svc.cluster.local/argocd` redirects through temporary login/spawn and starts a new Chromium pod.
 - A second `/argocd` visit starts a second Chromium pod rather than reusing the first.
 - `https://browser.browser.svc.cluster.local/headlamp` starts a Headlamp Chromium pod.
+- `https://browser.browser.svc.cluster.local/svt` starts an SVT Chromium pod.
 - The spawned session reaches Argo CD at `https://argocd-server.argocd.svc.cluster.local/`.
 - `https://browser.browser.svc.cluster.local/hub/token` and user token API requests return `403` through the browser proxy.
 - Inactive user pods are removed after the configured cull timeout.

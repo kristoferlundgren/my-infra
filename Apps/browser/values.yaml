@@ -10,6 +10,9 @@ browser:
     - path: headlamp
       title: Headlamp
       description: Open an isolated browser session for Headlamp.
+    - path: svt
+      title: SVT
+      description: Open an isolated browser session for SVT.
   tls:
     commonName: browser.browser.svc.cluster.local
     dnsNames:
