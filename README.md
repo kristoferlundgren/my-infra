@@ -18,13 +18,15 @@ This repository manages Kubernetes infrastructure applications with Argo CD.
 
 ## Tooling
 
-The repo includes a `devbox.json` with the main tools used to maintain the cluster configuration:
+The repo includes a `mise.toml` with the main tools used to maintain the cluster configuration:
 
 - `helm`
 - `kubectl`
 - `kubectx`
 - `argocd`
 - `kyverno`
+
+Install the configured tools with `mise install`. mise should be activated in your shell configuration so the tools are available when working in this repository.
 
 ## Documentation Policy
 
