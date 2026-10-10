@@ -14,7 +14,7 @@ This repository is a Git-managed source of truth for Kubernetes platform applica
 - `Apps/<app>/values.yaml`: Helm chart overrides for the app.
 - `Apps/<app>/templates/`: Templates for apps rendered from local charts in this repo.
 - `Apps/AppSet/`: Bootstrap app-of-apps resources.
-- `Apps/bootstrap.sh`: Bootstrap render-and-apply helper.
+- `Apps/AppSet/bootstrap.sh`: Bootstrap render-and-apply helper.
 
 ## How To Maintain Code And Config
 

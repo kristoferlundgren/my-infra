@@ -2,4 +2,4 @@
 
 ## Global variables
 
-Variables common to all apps in an ApplicatioSet.
+Variables common to all apps in an ApplicationSet.

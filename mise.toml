@@ -1,6 +1,15 @@
+[settings]
+lockfile = true
+
+[tool_config]
+locked = true
+
+# mise lock --global # Create lock file
+
 [tools]
+argocd = "latest"
 helm = "latest"
 kubectl = "latest"
 kubectx = "latest"
-argocd = "latest"
+kubens = "latest"
 kyverno = "latest"
