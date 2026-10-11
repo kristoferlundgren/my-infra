@@ -1,0 +1,9 @@
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-10"
+spec:
+  source:
+    chart: zitadel
+    repoURL: https://charts.zitadel.com
+    # https://zitadel.com/docs/self-hosting/deploy/kubernetes
+    targetRevision: 10.4.0

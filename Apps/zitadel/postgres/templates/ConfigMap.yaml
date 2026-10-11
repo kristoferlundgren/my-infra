@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zitadel-postgres-init
+data:
+  01-create-zitadel-user.sh: |
+    #!/bin/sh
+    set -eu
+    psql --set=ON_ERROR_STOP=1 \
+      --username "$POSTGRES_USER" \
+      --dbname "$POSTGRES_DB" \
+      --set=zitadel_password="$ZITADEL_PASSWORD" <<'SQL'
+    CREATE ROLE zitadel LOGIN PASSWORD :'zitadel_password';
+    CREATE DATABASE zitadel OWNER zitadel;
+    SQL

@@ -1,0 +1,8 @@
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-11"
+spec:
+  destination:
+    namespace: zitadel
+  source:
+    path: Apps/zitadel/postgres

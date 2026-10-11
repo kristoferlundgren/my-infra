@@ -1,0 +1,59 @@
+zitadel:
+  # Created by Apps/zitadel/secrets. This development key must be exactly 32
+  # bytes and kept stable because it encrypts persisted instance data.
+  masterkeySecretName: zitadel-masterkey
+  configmapConfig:
+    ExternalDomain: zitadel.localhost
+    ExternalPort: 80
+    ExternalSecure: false
+    # Allow the Terraform provider to reach Zitadel through its in-cluster
+    # Service while preserving zitadel.localhost as the public issuer.
+    TrustedDomains:
+      - zitadel.zitadel.svc.cluster.local
+    TLS:
+      Enabled: false
+    Database:
+      Postgres:
+        Host: zitadel-postgres
+        Port: 5432
+        Database: zitadel
+        User:
+          Username: zitadel
+          SSL:
+            Mode: disable
+        Admin:
+          Username: postgres
+          SSL:
+            Mode: disable
+  env:
+    # These credentials are provided by the Secret consumed by the PostgreSQL
+    # chart. The setup jobs use the admin account; Zitadel uses its own role.
+    - name: ZITADEL_DATABASE_POSTGRES_USER_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: zitadel-postgres-auth
+          key: password
+    - name: ZITADEL_DATABASE_POSTGRES_ADMIN_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: zitadel-postgres-auth
+          key: postgres-password
+
+ingress:
+  enabled: true
+  className: traefik
+  hosts:
+    - host: zitadel.localhost
+      paths:
+        - path: /
+          pathType: Prefix
+
+login:
+  ingress:
+    enabled: true
+    className: traefik
+    hosts:
+      - host: zitadel.localhost
+        paths:
+          - path: /ui/v2/login
+            pathType: Prefix

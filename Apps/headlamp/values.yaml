@@ -1,5 +1,20 @@
 config:
   oidc:
+    # The Terraform job in Apps/zitadel/terraform creates this Secret after
+    # Headlamp and Zitadel are available.
     secret:
       create: false
       name: oidc
+    externalSecret:
+      enabled: true
+      name: oidc
+      hasScopes: true
+
+ingress:
+  enabled: true
+  ingressClassName: traefik
+  hosts:
+    - host: headlamp.localhost
+      paths:
+        - path: /
+          pathType: Prefix

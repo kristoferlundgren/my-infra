@@ -1,0 +1,45 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: zitadel-terraform
+  namespace: zitadel
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation,HookSucceeded
+spec:
+  backoffLimit: 2
+  activeDeadlineSeconds: 1800
+  template:
+    spec:
+      restartPolicy: Never
+      serviceAccountName: zitadel-terraform
+      containers:
+        - name: terraform
+          image: {{ .Values.image | quote }}
+          imagePullPolicy: IfNotPresent
+          command: ["/bin/sh", "-ec"]
+          args:
+            - cp /configuration/main.tf /work/main.tf && cd /work && terraform init -input=false && terraform apply -input=false -auto-approve
+          env:
+            - name: TF_VAR_zitadel_access_token
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.auth.secretName }}
+                  key: {{ .Values.auth.secretKey }}
+          volumeMounts:
+            - name: configuration
+              mountPath: /configuration
+              readOnly: true
+            - name: work
+              mountPath: /work
+            - name: state
+              mountPath: /state
+      volumes:
+        - name: configuration
+          configMap:
+            name: zitadel-terraform
+        - name: work
+          emptyDir: {}
+        - name: state
+          persistentVolumeClaim:
+            claimName: zitadel-terraform-state

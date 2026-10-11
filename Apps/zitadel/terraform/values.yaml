@@ -1,0 +1,25 @@
+image: hashicorp/terraform:1.16.5
+
+providerVersions:
+  zitadel: 3.8.7
+  kubernetes: 3.2.1
+
+zitadel:
+  apiDomain: zitadel.zitadel.svc.cluster.local
+  apiPort: "8080"
+  issuerURL: http://zitadel.localhost
+
+headlamp:
+  namespace: headlamp
+  name: Headlamp
+  projectName: Headlamp
+  redirectURI: http://headlamp.localhost/oidc-callback
+  postLogoutRedirectURI: http://headlamp.localhost/
+
+auth:
+  # Create this Secret out of band. Do not commit the machine-user PAT.
+  secretName: zitadel-terraform-auth
+  secretKey: access-token
+
+state:
+  size: 1Gi

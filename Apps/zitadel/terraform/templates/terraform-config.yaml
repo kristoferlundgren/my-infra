@@ -1,0 +1,80 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zitadel-terraform
+  namespace: zitadel
+data:
+  main.tf: |
+    terraform {
+      required_providers {
+        zitadel = {
+          source  = "zitadel/zitadel"
+          version = "{{ .Values.providerVersions.zitadel }}"
+        }
+        kubernetes = {
+          source  = "hashicorp/kubernetes"
+          version = "{{ .Values.providerVersions.kubernetes }}"
+        }
+      }
+      backend "local" {
+        path = "/state/terraform.tfstate"
+      }
+    }
+
+    variable "zitadel_access_token" {
+      type      = string
+      sensitive = true
+    }
+
+    provider "zitadel" {
+      domain      = "{{ .Values.zitadel.apiDomain }}"
+      port        = "{{ .Values.zitadel.apiPort }}"
+      insecure    = true
+      access_token = var.zitadel_access_token
+    }
+
+    provider "kubernetes" {
+      host                   = "https://kubernetes.default.svc"
+      token                  = file("/var/run/secrets/kubernetes.io/serviceaccount/token")
+      cluster_ca_certificate = file("/var/run/secrets/kubernetes.io/serviceaccount/ca.crt")
+    }
+
+    data "zitadel_organizations" "default" {
+      is_default = true
+    }
+
+    resource "zitadel_project" "headlamp" {
+      name   = "{{ .Values.headlamp.projectName }}"
+      org_id = data.zitadel_organizations.default.ids[0]
+    }
+
+    resource "zitadel_application_oidc" "headlamp" {
+      org_id                     = data.zitadel_organizations.default.ids[0]
+      project_id                 = zitadel_project.headlamp.id
+      name                       = "{{ .Values.headlamp.name }}"
+      app_type                   = "OIDC_APP_TYPE_WEB"
+      auth_method_type           = "OIDC_AUTH_METHOD_TYPE_BASIC"
+      grant_types                = ["OIDC_GRANT_TYPE_AUTHORIZATION_CODE"]
+      response_types             = ["OIDC_RESPONSE_TYPE_CODE"]
+      redirect_uris              = ["{{ .Values.headlamp.redirectURI }}"]
+      post_logout_redirect_uris  = ["{{ .Values.headlamp.postLogoutRedirectURI }}"]
+      dev_mode                   = true
+    }
+
+    resource "kubernetes_secret_v1" "headlamp_oidc" {
+      metadata {
+        name      = "oidc"
+        namespace = "{{ .Values.headlamp.namespace }}"
+      }
+
+      data = {
+        OIDC_CLIENT_ID     = zitadel_application_oidc.headlamp.client_id
+        OIDC_CLIENT_SECRET = zitadel_application_oidc.headlamp.client_secret
+        OIDC_ISSUER_URL    = "{{ .Values.zitadel.issuerURL }}"
+        OIDC_SCOPES        = "openid profile email"
+        OIDC_CALLBACK_URL  = "{{ .Values.headlamp.redirectURI }}"
+        OIDC_USE_PKCE      = "true"
+      }
+
+      type = "Opaque"
+    }

@@ -1,0 +1,15 @@
+image:
+  repository: postgres
+  tag: 17.6-alpine
+
+storage:
+  size: 8Gi
+  # Set this to the cluster's StorageClass when the default is unsuitable.
+  storageClassName: ""
+
+auth:
+  # Create this Secret in the zitadel namespace with both keys. Keep the
+  # credentials stable after PostgreSQL initializes its persistent volume.
+  secretName: zitadel-postgres-auth
+  applicationPasswordKey: password
+  adminPasswordKey: postgres-password

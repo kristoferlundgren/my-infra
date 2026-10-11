@@ -1,0 +1,5 @@
+apiVersion: v2
+name: zitadel-terraform
+description: Terraform job that provisions the Headlamp OIDC client in Zitadel
+type: application
+version: 1.0.0
