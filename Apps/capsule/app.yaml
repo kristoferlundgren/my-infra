@@ -1,0 +1,8 @@
+# https://projectcapsule.github.io/charts/
+# https://github.com/projectcapsule/capsule
+spec:
+  source:
+    chart: capsule
+    repoURL: https://projectcapsule.github.io/charts/
+    # https://artifacthub.io/packages/helm/capsule/capsule
+    targetRevision: 0.15.2
