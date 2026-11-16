@@ -6,10 +6,10 @@ revision: release/staging
 
 # List of enabled applications.
 # An empty list means no applications are enabled.
-enabledApps:
-  - AppSet
-  - headlamp
-  - capsule
+# enabledApps:
+#   - AppSet
+#   - headlamp
+#   - capsule
 
 # List of disabled applications.
 # An app that is also on the enabled list will be considered disabled.
