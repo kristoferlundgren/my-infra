@@ -3,3 +3,22 @@ name: infra
 namespace: infra
 repoURL: https://github.com/kristoferlundgren/my-infra
 revision: release/staging
+
+# List of enabled applications.
+# An empty list means no applications are enabled.
+enabledApps:
+  - AppSet
+  - headlamp
+  - capsule
+
+# List of disabled applications.
+# An app that is also on the enabled list will be considered disabled.
+disabledApps:
+  - zitadel
+
+appsValuesObjects:
+  headlamp:
+    # Test/mockup configuration for headlamp
+    tests:
+      test-a: change-me
+      test-b: change-me
