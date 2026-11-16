@@ -6,7 +6,6 @@ metadata:
 spec:
   project: infra
   destination:
-    namespace: infra
     server: https://kubernetes.default.svc
   sources:
     - path: AppSet
